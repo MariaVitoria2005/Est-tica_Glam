@@ -9,11 +9,17 @@ class Profissional extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['telefone','especialidade','user_id'];
+    protected $fillable = ['nome','email','telefone','disponibilidades','agendamento_id','servico_id'];
 
-    public function user()
+    public function agendamento()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo (Agendamento::class);
+
+    }
+
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class);
 
     }
 }

@@ -9,11 +9,17 @@ class Feedback extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['nota','comentario','agendamento_id'];
+    protected $fillable = ['nota','comentario','data_feedback','profissional_id','servico_id'];
     
-    public function agendamento()
+    public function profissional()
     {
-        return $this->hasMany (Agendamento::class);
+        return $this->belongsTo (Profissional::class);
+
+    }
+
+    public function servico()
+    {
+        return $this->belongsTo(Servico::class);
 
     }
 }

@@ -9,11 +9,11 @@ class Pagamento extends Model
 {
     use HasFactory;
     
-    protected $fillable = ['metodo','valor','data_pagamento','agendamento_id'];
+    protected $fillable = ['metodo_pagamento','valor','data_pagamento','status','cliente_id'];
     
-    public function agendamento()
+    public function cliente()
     {
-        return $this->hasMany (Agendamento::class);
+        return $this->belongsTo (Cliente::class);
 
     }
 }
