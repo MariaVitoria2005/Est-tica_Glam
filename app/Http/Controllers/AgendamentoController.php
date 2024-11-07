@@ -12,7 +12,9 @@ class AgendamentoController
      */
     public function index()
     {
-        //
+        $agentadamentos = Agendamento::all();
+        
+        return view('Home.index', ['agendamento' => $agentadamentos]);
     }
 
     /**

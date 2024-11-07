@@ -8,7 +8,7 @@ class Cancelamento extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['porcentagem','descricao','aplicar_em_tipo_servico','agendamento_id'];
+    protected $fillable = ['percentagem','descricao','tipo_servico','agendamento_id'];
 
     public function agendamento()
     {

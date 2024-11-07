@@ -12,7 +12,9 @@ class ServicoController
      */
     public function index()
     {
-        //
+        $servicos = Servico::all();
+        
+        return view('servico.index', ['servico' => $servicos]);
     }
 
     /**

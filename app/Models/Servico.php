@@ -9,7 +9,7 @@ class Servico extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome','descricao','preco','agendamento_id'];
+    protected $fillable = ['tipo_servico','descricao','preco','agendamento_id'];
 
     public function agendamento()
     {
