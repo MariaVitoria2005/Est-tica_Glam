@@ -12,9 +12,14 @@ class ServicoController
      */
     public function index()
     {
-        $servicos = Servico::all();
+        // $servicos = Servico::all();
         
-        return view('servico.index', ['servico' => $servicos]);
+        // return view('Home.index', ['servicos' => $servicos]);
+
+        $servicos = Servico::all();
+
+       
+        return view('Home.index', compact('servicos'));
     }
 
     /**
@@ -30,7 +35,7 @@ class ServicoController
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**

@@ -22,7 +22,7 @@ class AgendamentoController
      */
     public function create()
     {
-        //
+    
     }
 
     /**
@@ -30,7 +30,7 @@ class AgendamentoController
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
