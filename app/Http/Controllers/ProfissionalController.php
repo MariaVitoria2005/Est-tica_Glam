@@ -12,7 +12,9 @@ class ProfissionalController
      */
     public function index()
     {
-        //
+        $profissionais = Profissional::all();
+        
+        return view('Home.agendamento',  compact('profissional'));
     }
 
     /**

@@ -12,7 +12,9 @@ class ClienteController
      */
     public function index()
     {
-        //
+        $clientes = Cliente::all();
+        
+        return view('Home.agendamento',  compact('clientes'));
     }
 
     /**
@@ -20,7 +22,9 @@ class ClienteController
      */
     public function create()
     {
-        //
+        $clientes = Cliente::all();
+        
+        return view('Home.agendamento')->with('clientes', $clientes);
     }
 
     /**

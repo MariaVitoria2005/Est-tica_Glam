@@ -12,6 +12,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/', [AgendamentoController::class, 'index'])->name('Home.index');
 Route::post('/agendamento', [AgendamentoController::class, 'store'])->name('agendamento.store');
+Route::get('/agendamento/create', [AgendamentoController::class, 'create'])->name('agendamento.create');
+
 Route::get('/', [ServicoController::class, 'index'])->name('Home.index');
 
 

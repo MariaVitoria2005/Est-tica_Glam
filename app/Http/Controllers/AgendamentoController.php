@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agendamento;
+use App\Models\Servico;
+use App\Models\Cliente;
+use App\Models\Profissional;
 use Illuminate\Http\Request;
 
 class AgendamentoController
@@ -12,9 +15,9 @@ class AgendamentoController
      */
     public function index()
     {
-        $agentadamentos = Agendamento::all();
+        $agendamentos = Agendamento::all();
         
-        return view('Home.index', ['agendamento' => $agentadamentos]);
+        return view('Home.index', ['agendamento' => $agendamentos]);
     }
 
     /**
@@ -22,7 +25,10 @@ class AgendamentoController
      */
     public function create()
     {
-    
+        $servicos = Servico::all();
+        $clientes = Cliente::all();
+        $profissionais =  Profissional::all();
+        return view('Home.agendamento',['servicos' => $servicos, 'clientes' => $clientes, 'profissionais' => $profissionais]);
     }
 
     /**
@@ -30,7 +36,18 @@ class AgendamentoController
      */
     public function store(Request $request)
     {
+       $request->validate([
+        'data' => 'required',
+        'hora' => 'required',
+        'cliente_id' => 'required',
+        'servico_id' => 'required',
+        'profissional_id' => 'required',
+        'status' => 'required',
+       ]);
+
+       Agendamento::create($request->all());
        
+       return redirect()->route('Home.index');
     }
 
     /**

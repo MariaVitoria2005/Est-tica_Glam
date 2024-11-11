@@ -12,13 +12,8 @@ class ServicoController
      */
     public function index()
     {
-        // $servicos = Servico::all();
-        
-        // return view('Home.index', ['servicos' => $servicos]);
-
         $servicos = Servico::all();
 
-       
         return view('Home.index', compact('servicos'));
     }
 
@@ -27,7 +22,9 @@ class ServicoController
      */
     public function create()
     {
-        //
+        $servicos = Servico::all();
+        
+        return view('Home.agendamento',compact('servicos'));
     }
 
     /**
@@ -35,7 +32,17 @@ class ServicoController
      */
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'tipo_servico' => 'required',
+            'descricao' => 'required',
+            'preco' => 'required',
+            'agendamento_id' => 'required',
+            'foto' => 'required',
+           ]);
+    
+           Servico::create($request->all());
+    
+           return redirect()->route('Home.index');
     }
 
     /**

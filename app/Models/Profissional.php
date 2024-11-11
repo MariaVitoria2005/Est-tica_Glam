@@ -9,7 +9,10 @@ class Profissional extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nome','email','telefone','disponibilidades','agendamento_id','servico_id'];
+    protected $table = 'profissionais';
+
+
+    protected $fillable = ['nome','email','telefone','especialidade','disponibilidades','agendamento_id','servico_id'];
 
     public function agendamento()
     {
