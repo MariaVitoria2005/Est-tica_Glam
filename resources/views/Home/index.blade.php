@@ -26,31 +26,35 @@
         .modal {
             z-index: 1050;  /* Pode ser ajustado conforme necessário */
         }
+
         .cabecalho{
             display: flex;
             justify-content: space-between;
         }
+
         .entrar{
             margin-left: auto;
         }
+
         .boasvindas{
             flex-grow: 1;
             text-align: center;
         }
-        
     </style>
 </head>
     <body>
             <!-- Header -->
             <header class="bg-primary text-white text-center p-4">
                 <div class="cabecalho">
+                <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100"> <!-- Substitua com o caminho da sua logo -->
                     <div class="boasvindas">
                         <h1>Bem-vindo à Estética Glam!</h1>
+                        <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
                     </div>
                     
                     <div class="entrar">
                         <!-- Botão para abrir o modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalExemplo">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Login
                         </button>
                     </div>
@@ -59,6 +63,9 @@
 
             <!-- Redes Sociais -->
             <section id="redes-sociais" class="text-center mt-4">
+
+                
+
                 <h2>Nos acompanhe nas redes sociais!</h2>
                 <ul class="list-inline">
                     <li class="list-inline-item">
@@ -83,6 +90,73 @@
                     </li>
                 </ul>
             </section>
+
+            <!-- Agendamento de Serviços -->
+            <section id="agendamento" class="container mt-5">
+                <h2>Agende seu Serviço</h2>
+                <p>Escolha o serviço, data e horário que melhor atendem a sua necessidade.</p>
+                <form action="{{ route('agendamento.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="servico" class="form-label">Serviço</label>
+                        <select class="form-control" id="servico" name="servico_id">
+                            @foreach($servicos as $servico)
+                                <option value="{{ $servico->id }}">{{ $servico->tipo_servico }} - R${{ $servico->preco }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="horario" class="form-label">Horário</label>
+                        <input type="time" class="form-control" id="horario" name="horario" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                </form>
+            </section>
+
+            <!-- Feedbacks de Clientes -->
+            <section id="feedbacks" class="container mt-5">
+                <h2>O que nossos clientes dizem</h2>
+                <div class="row">
+                    @foreach($feedbacks as $feedback)
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $feedback->cliente->nome }}</h5>
+                                    <p class="card-text">"{{ $feedback->comentario }}"</p>
+                                    <p class="card-text"><strong>Avaliação:</strong> {{ $feedback->avaliacao }} ★</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+
+            <!-- Formulário de Feedback -->
+            <section id="deixar-feedback" class="container mt-5">
+                <h2>Deixe sua opinião</h2>
+                <form action="{{ route('feedback.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="comentario" class="form-label">Comentário</label>
+                        <textarea class="form-control" id="comentario" name="comentario" rows="3" required></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="avaliacao" class="form-label">Avaliação</label>
+                        <input type="number" class="form-control" id="avaliacao" name="avaliacao" min="1" max="5" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Enviar Feedback</button>
+                </form>
+            </section>
+
             
             <!-- Exibir foto do usuário logado -->
             @if (Auth::check())
@@ -94,7 +168,7 @@
 
             <!-- Serviços Disponíveis -->
             <section id="servicos" class="container mt-5">
-                <h2>Serviços Disponíveis</h2>
+                <h2>Serviços Disponivel</h2>
                 <div class="row">
                     @foreach($servicos as $servico)
                         <div class="col-md-4 mb-4">
@@ -105,7 +179,8 @@
                                     <h5 class="card-title">{{ $servico->tipo_servico }}</h5>
                                     <p class="card-text">{{ $servico->descricao }}</p>
                                     <p class="card-text">R${{ $servico->preco }}</p>
-                                    <a href="{{ route('agendamento.create') }}" class="btn btn-primary">Agendamento</a>
+                                    <a href="{{ route('agendamento.create') }}" class="btn btn-outline-primary">Agendar</a>
+                                    <a href="#" class="btn btn-success">Detalhes</a>
                                 </div>
                             </div>
                         </div>
@@ -113,43 +188,119 @@
                 </div>
             </section>
 
-            
+            <section id="profissionais" class="container mt-5">
+                <h2>Conheça nossos Profissionais</h2>
+                <div class="row">
+                    @foreach($profissionais as $profissional)
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <img src="{{ asset('storage/' . $profissional->foto) }}" class="card-img-top" alt="{{ $profissional->nome }}">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $profissional->nome }}</h5>
+                                    <p class="card-text">{{ $profissional->descricao }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+
+            <!-- Histórico de Agendamentos -->
+            <section id="historico-agendamentos" class="container mt-5">
+                <h2>Meus Agendamentos</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Serviço</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Horário</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($agendamentos as $agendamento)
+                            <tr>
+                                <td>{{ $agendamento->servico->tipo_servico }}</td>
+                                <td>{{ $agendamento->data }}</td>
+                                <td>{{ $agendamento->horario }}</td>
+                                <td>
+                                    @if($agendamento->cancelado)
+                                        Cancelado
+                                    @else
+                                        Confirmado
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </section>
+
+            <section id="pagamento" class="container mt-5">
+                <h2>Pagamento do Serviço</h2>
+                <form action="{{ route('pagamento.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="valor" class="form-label">Valor Total</label>
+                        <input type="text" class="form-control" id="valor" name="valor" value="{{ $agendamento->servico->preco }}" readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="metodo_pagamento" class="form-label">Método de Pagamento</label>
+                        <select class="form-control" id="metodo_pagamento" name="metodo_pagamento" required>
+                            <option value="cartao_credito">Cartão de Crédito</option>
+                            <option value="pix">PIX</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Finalizar Pagamento</button>
+                </form>
+            </section>
+
+            <section id="sobre-nos" class="container mt-5">
+                <h2>Sobre a Estética Glam</h2>
+                <p>A Estética Glam é uma clínica especializada em oferecer tratamentos de beleza de alta qualidade. Nossa missão é proporcionar uma experiência única para nossos clientes, aliando bem-estar e resultados excepcionais.</p>
+                <p><strong>Missão:</strong> Oferecer tratamentos estéticos inovadores e personalizados.</p>
+                <p><strong>Visão:</strong> Ser a clínica de estética mais renomada e confiável da região.</p>
+                <p><strong>Valores:</strong> Comprometimento, excelência, confiança e respeito.</p>
+            </section>
 
             <!-- Modal de Login (apenas visível se o usuário não estiver logado) -->
-            <div class="modal fade" id="modalExemplo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                            <h5 class="modal-title" id="loginModalLabel">Login</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                         </div>
                         <div class="modal-body">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-                                <!-- Email Address -->
-                                <div>
-                                    <x-input-label for="email" :value="__('Email')" />
-                                    <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-                                    <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                                <!-- Nome -->
+                                <div class="mb-3">
+                                    <label for="name" class="form-label" >Nome</label>
+                                    <input type="text" class="form-control" id="name" name="name" required autofocus>
                                 </div>
-                                <!-- Password -->
-                                <div class="mt-4">
-                                    <x-input-label for="password" :value="__('Senha')" />
-                                    <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
-                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                <!-- Email -->
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Entrar</button>
+                                <!-- Senha -->
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <!-- Botão de Login -->
+                                <button type="submit" class="btn btn-primary w-100">Entrar</button>
                             </form>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Scripts do Bootstrap 5 -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>
-

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agendamento;
+use App\Models\cliente;
+use App\Models\Profissional;
+use App\Models\Servico;
 use App\Models\Feedback;
 use Illuminate\Http\Request;
 
@@ -12,7 +16,10 @@ class FeedbackController
      */
     public function index()
     {
-        //
+        $feedbacks = Feedback::all();
+       
+        return view('Home.index',  compact('feedbacks'));
+       
     }
 
     /**
@@ -20,7 +27,16 @@ class FeedbackController
      */
     public function create()
     {
-        //
+        // $feedbacks = Feedback::all();
+        
+        // return view('Home.index')->with('feedbacks', $feedbacks);
+
+        $agendamentos = Agendamento::all();
+        $clientes = Cliente::all();
+        $profissionais = Profissional::all();
+        $servicos = Servico::all();
+
+        return view('Home.index',['agendamentos' => $agendamentos, 'clientes' => $clientes, 'profissionais' => $profissionais, 'servicos' =>$servicos] );
     }
 
     /**
@@ -28,7 +44,19 @@ class FeedbackController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+          'nota' => 'required',
+          'comentario' => 'required',
+          'agendamento_id' => 'required',
+          'data_feedback' => 'required',
+          'cliente_id' => 'required',
+          'profissional_id' => 'required',
+          'servico_id' => 'required',
+        ]);
+    
+        Feedback::create($request->all());
+           
+        return redirect()->route('Home.index');
     }
 
     /**

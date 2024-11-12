@@ -6,29 +6,53 @@
         <title>Cadastro de Agendamento</title>
 
         <style>
+        /* Estilo geral da página */
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f7fc;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
         }
 
-        h1 {
+        /* Estilo do cabeçalho */
+        header {
+            background-color: #007bff; /* Cor de fundo azul */
+            color: white;
+            padding: 20px 0; /* Espaçamento superior e inferior */
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Estilo do título dentro do cabeçalho */
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        /* Para dar um pouco de espaçamento entre o conteúdo do formulário e o cabeçalho fixo */
+        .form-container {
+            margin-top: 120px; /* Ajuste o valor conforme necessário */
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        h2 {
             color: #333;
             text-align: center;
             margin-bottom: 20px;
         }
 
+        /* Estilos do formulário */
         form {
             background-color: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
         }
 
         label {
@@ -50,7 +74,6 @@
             font-size: 16px;
         }
 
-        
         button {
             width: 100%;
             padding: 12px;
@@ -67,59 +90,112 @@
             background-color: #0056b3;
         }
 
+        .btn-voltar {
+            background-color: #6c757d;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-voltar:hover {
+            background-color: #5a6268;
+        }
+
         /* Responsividade */
         @media (max-width: 600px) {
+            header h1 {
+                font-size: 24px;
+            }
+
+            .form-container {
+                margin-top: 80px;
+                padding: 15px;
+            }
+
             form {
                 padding: 20px;
             }
 
-            h1 {
-                font-size: 24px;
+            h2 {
+                font-size: 18px;
             }
         }
+        .cabecalho{
+            display: flex;
+            justify-content: space-between;
+        }
+        .boasvindas{
+            flex-grow: 1;
+            text-align: center;
+        }
     </style>
+   
 
-    </head>
+</head>
     <body>
-        <h1>Novo Agendamento:</h1>
+       
+            <header class="bg-primary text-white text-center p-4">
+                <div class="cabecalho">
+                    <div class="boasvindas">
+                        <h1>Bem-vindo à Estética Glam!</h1>
+                        <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
+                    </div>
+                    
+                    
+                </div>
+            </header>
 
-        <form action="{{ route('agendamento.store') }}" method="POST">
-            @csrf
-            <label>DATA:</label>
-            <input type="date" name="data">
+        <!-- Container do Formulário -->
+        <div class="form-container">
 
-            <label>HORA:</label>
-            <input type="time" name="hora">
+            <h2>Agende seu serviço agora e garanta um atendimento exclusivo e personalizado!</h2>
 
-            <label for="">CLIENTE:</label>
-            <select name="cliente_id" id="cliente_id">
-                @foreach($clientes as $cliente)
-                    <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                @endforeach
-            </select>
+            <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">Voltar para a Página Inicial</button>
+            <!-- Formulário de Agendamento -->
+            <form action="{{ route('agendamento.store') }}" method="POST">
+                @csrf
 
-            <label for="">SERVICO</label>
-            <select name="servico_id" id="servico_id">
-                @foreach($servicos as $servico)
-                    <option value="{{$servico->id}}">{{ $servico->tipo_servico}}</option>
-                @endforeach
-            </select>
+                <label>DATA:</label>
+                <input type="date" name="data">
 
-            <label for="">PROFISSIONAL:</label>
-            <select name="profissional_id" id="profissional_id">
-                @foreach($profissionais as $profissional)
-                    <option value="{{$profissional->id}}">{{ $profissional->nome}}</option>
-                @endforeach
-            </select>
+                <label>HORA:</label>
+                <input type="time" name="hora">
 
-            <label for="status">STATUS:</label>
-            <select name="status" id="status">
-                @foreach($status as $item)
-                    <option value="{{ $item->id }}">{{ $item->nome }}</option>
-                @endforeach
-            </select>
+                <label for="">CLIENTE:</label>
+                <select name="cliente_id" id="cliente_id">
+                    @foreach($clientes as $cliente)
+                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
+                    @endforeach
+                </select>
 
-            <button type="submit" class="btn btn-outline-dark">Salvar</button>
-        </form>
+                <label for="">SERVIÇO:</label>
+                <select name="servico_id" id="servico_id">
+                    @foreach($servicos as $servico)
+                        <option value="{{ $servico->id }}">{{ $servico->tipo_servico }}</option>
+                    @endforeach
+                </select>
+
+                <label for="">PROFISSIONAL:</label>
+                <select name="profissional_id" id="profissional_id">
+                    @foreach($profissionais as $profissional)
+                        <option value="{{ $profissional->id }}">{{ $profissional->nome }}</option>
+                    @endforeach
+                </select>
+
+                <label for="status">STATUS:</label>
+                <select name="status" id="status">
+                    @foreach($status as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
+                </select>
+
+                <button type="submit" class="btn btn-outline-dark">Salvar</button>
+            </form>
+        </div>
+
     </body>
 </html>

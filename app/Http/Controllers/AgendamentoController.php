@@ -6,7 +6,9 @@ use App\Models\Agendamento;
 use App\Models\Servico;
 use App\Models\Cliente;
 use App\Models\Profissional;
+use App\Models\status;
 use Illuminate\Http\Request;
+use App\Models\Feedback;
 
 class AgendamentoController
 {
@@ -16,8 +18,9 @@ class AgendamentoController
     public function index()
     {
         $agendamentos = Agendamento::all();
+        $feedbacks = Feedback::all();
         
-        return view('Home.index', ['agendamento' => $agendamentos]);
+        return view('Home.index', ['agendamento' => $agendamentos, 'feedbacks'=>$feedbacks]);
     }
 
     /**
@@ -27,8 +30,10 @@ class AgendamentoController
     {
         $servicos = Servico::all();
         $clientes = Cliente::all();
-        $profissionais =  Profissional::all();
-        return view('Home.agendamento',['servicos' => $servicos, 'clientes' => $clientes, 'profissionais' => $profissionais]);
+        $profissionais = Profissional::all();
+        $status = ['Cancelado','Confirmado','Concluído'];
+
+        return view('Home.agendamento',['servicos' => $servicos, 'clientes' => $clientes, 'profissionais' => $profissionais, 'status' =>$status] );
     }
 
     /**
@@ -37,13 +42,13 @@ class AgendamentoController
     public function store(Request $request)
     {
        $request->validate([
-        'data' => 'required',
-        'hora' => 'required',
-        'cliente_id' => 'required',
-        'servico_id' => 'required',
-        'profissional_id' => 'required',
-        'status' => 'required',
-       ]);
+         'data' => 'required',
+          'hora' => 'required',
+          'cliente_id' => 'required',
+          'servico_id' => 'required',
+          'profissional_id' => 'required',
+          'status' => 'required',
+        ]);
 
        Agendamento::create($request->all());
        

@@ -11,7 +11,6 @@ class Profissional extends Model
 
     protected $table = 'profissionais';
 
-
     protected $fillable = ['nome','email','telefone','especialidade','disponibilidades','agendamento_id','servico_id'];
 
     public function agendamento()
