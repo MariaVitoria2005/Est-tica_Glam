@@ -8,6 +8,8 @@ class Agendamento extends Model
 {
     use HasFactory;
 
+    protected $table = 'agendamentos';
+
     protected $fillable = ['data','hora','cliente_id','servico_id','profissional_id','status'];
     
     public function cliente()
@@ -17,7 +19,7 @@ class Agendamento extends Model
 
     public function servico()
     {
-       return $this->belongsTo (Servico::class);
+        return $this->belongsTo(Servico::class); // Definindo que cada agendamento pertence a um serviço
     }
     
     public function profissional()

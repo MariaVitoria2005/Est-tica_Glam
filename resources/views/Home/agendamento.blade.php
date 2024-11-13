@@ -152,50 +152,38 @@
         <!-- Container do Formulário -->
         <div class="form-container">
 
-            <h2>Agende seu serviço agora e garanta um atendimento exclusivo e personalizado!</h2>
+            
 
-            <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">Voltar para a Página Inicial</button>
-            <!-- Formulário de Agendamento -->
-            <form action="{{ route('agendamento.store') }}" method="POST">
-                @csrf
+            <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">Voltar </button>
+           
+             <!-- Agendamento de Serviços -->
+            <section id="agendamento" class="container mt-5">
+                <h2>Agende seu Serviço</h2>
+                <p>Escolha o serviço, data e horário que melhor atendem a sua necessidade.</p>
+                <form action="{{ route('agendamento.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="servico" class="form-label">Serviço</label>
+                        <select class="form-control" id="servico" name="servico_id">
+                            @foreach($servicos as $servico)
+                                <option value="{{ $servico->id }}">{{ $servico->tipo_servico }} - R${{ $servico->preco }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <label>DATA:</label>
-                <input type="date" name="data">
+                    <div class="mb-3">
+                        <label for="data" class="form-label">Data</label>
+                        <input type="date" class="form-control" id="data" name="data" required>
+                    </div>
 
-                <label>HORA:</label>
-                <input type="time" name="hora">
+                    <div class="mb-3">
+                        <label for="horario" class="form-label">Horário</label>
+                        <input type="time" class="form-control" id="hora" name="hora" required>
+                    </div>
 
-                <label for="">CLIENTE:</label>
-                <select name="cliente_id" id="cliente_id">
-                    @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id }}">{{ $cliente->nome }}</option>
-                    @endforeach
-                </select>
-
-                <label for="">SERVIÇO:</label>
-                <select name="servico_id" id="servico_id">
-                    @foreach($servicos as $servico)
-                        <option value="{{ $servico->id }}">{{ $servico->tipo_servico }}</option>
-                    @endforeach
-                </select>
-
-                <label for="">PROFISSIONAL:</label>
-                <select name="profissional_id" id="profissional_id">
-                    @foreach($profissionais as $profissional)
-                        <option value="{{ $profissional->id }}">{{ $profissional->nome }}</option>
-                    @endforeach
-                </select>
-
-                <label for="status">STATUS:</label>
-                <select name="status" id="status">
-                    @foreach($status as $item)
-                        <option value="{{ $item }}">{{ $item }}</option>
-                    @endforeach
-                </select>
-
-                <button type="submit" class="btn btn-outline-dark">Salvar</button>
-            </form>
-        </div>
+                    <button type="submit" class="btn btn-primary">Agendar</button>
+                </form>
+            </section>
 
     </body>
 </html>

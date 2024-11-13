@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Profissional;
 use Illuminate\Http\Request;
+use App\Models\Agendamento;
+use App\Models\Servico;
 
 class ProfissionalController
 {
@@ -14,7 +16,7 @@ class ProfissionalController
     {
         $profissionais = Profissional::all();
         
-        return view('Home.agendamento',  compact('profissional'));
+        return view('Home.index',  ['profissionais' => $profissionais]);
     }
 
     /**
@@ -22,7 +24,10 @@ class ProfissionalController
      */
     public function create()
     {
-        //
+        $agendamentos = Agendamento::all();
+        $servicos = Servico::all();
+
+        return view('Home.index',['agendamentos' => $agendamentos,'servicos' =>$servicos] );
     }
 
     /**
@@ -30,7 +35,20 @@ class ProfissionalController
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+             'nome' => 'required',
+             'email' => 'required',
+             'telefone' => 'required',
+             'especialidade' => 'required',
+             'disponibilidades' => 'required',
+             'agendamento_id' => 'required',
+             'servico_id' => 'required',
+             'foto' => 'required',
+           ]);
+   
+          Profissional::create($request->all());
+          
+          return redirect()->route('Home.index');
     }
 
     /**
