@@ -166,7 +166,7 @@
                         <label for="servico" class="form-label">Serviço</label>
                         <select class="form-control" id="servico" name="servico_id">
                             @foreach($servicos as $servico)
-                                <option value="{{ $servico->id }}">{{ $servico->tipo_servico }} - R${{ $servico->preco }}</option>
+                                <option value="{{ $servico->id }}">{{ $servico->tipo_servico }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -48,9 +48,14 @@ class ServicoController
     /**
      * Display the specified resource.
      */
-    public function show(Servico $servico)
+    public function show( $id)
     {
-        //
+         // Recupera o serviço pelo ID
+         $servico = Servico::findOrFail($id);
+
+         // Retorna a view com o serviço
+         return view('servicos.show', compact('servico'));
+     
     }
 
     /**

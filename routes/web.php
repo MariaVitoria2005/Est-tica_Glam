@@ -1,13 +1,13 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\PagamentoController;
-use App\Models\Feedback;
-use Illuminate\Support\Facades\Route;
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -28,6 +28,10 @@ Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.st
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
 
 
+
+
+Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos_index');
+Route::get('/pagamentos/{id}', [PagamentoController::class, 'show'])->name('pagamentos.show');
 
 
 
