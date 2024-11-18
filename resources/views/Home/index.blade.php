@@ -346,7 +346,7 @@
                                 </a>
                             </li>
                             <li class="list-inline-item">
-                                <a href="https://instagram.com/suaempresa" class="btn btn-link" target="_blank">
+                                <a href="https://instagram.com/https://https://www.instagram.com/estetica_glam2025/" class="btn btn-link" target="_blank">
                                     <i class="fab fa-instagram-square fa-3x text-danger"></i>
                                 </a>
                             </li>
@@ -376,8 +376,6 @@
                     </div>
                 </div>
             </section>
-           
-
             
             <!-- Exibir foto do usuário logado -->
             @if (Auth::check())
@@ -403,8 +401,11 @@
 
                         <!-- Botões de ação -->
                         <a href="{{ route('novo_agendamento') }}" class="btn btn-outline-primary">
-                        <i class="fas fa-calendar-check"></i> Agendar</a>
-                        <a href="{{ route('servicos.show', $servico->id) }}" class="btn btn-success">Detalhes</a>
+                            <i class="fas fa-calendar-check"></i> Agendar
+                        </a>
+                        <a href="{{ route('servicos.show', $servico->id) }}" class="btn btn-success">
+                            <i class="fas fa-info-circle"></i> Detalhes
+                        </a>
                     </div>
                 </div>
                         </div>
@@ -413,7 +414,7 @@
             </section>
 
           
-            <!-- Feedbacks de Clientes -->
+            <!-- Feedbacks de Clientes
             <section id="feedbacks" class="container mt-5">
                 <h2>O que nossos clientes dizem</h2>
                 <div class="row">
@@ -429,7 +430,7 @@
                         </div>
                     @endforeach
                 </div>
-            </section>
+            </section> -->
 
             <!-- Formulário de Feedback -->
             <section id="deixar-feedback" class="container mt-5">

@@ -14,7 +14,8 @@ class ServicoController
     {
         $servicos = Servico::all();
 
-        return view('Home.index', compact('servicos'));
+        return view('servicos.index', compact('servicos'));
+       
     }
 
     /**
@@ -50,11 +51,10 @@ class ServicoController
      */
     public function show( $id)
     {
-         // Recupera o serviço pelo ID
-         $servico = Servico::findOrFail($id);
+        $servico = Servico::findOrFail($id);  // Encontra o serviço pelo ID
+        return view('servicos.show', compact('servico'));
 
-         // Retorna a view com o serviço
-         return view('servicos.show', compact('servico'));
+        
      
     }
 

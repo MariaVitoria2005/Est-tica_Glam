@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro de Agendamento</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Agendamento</title>
 
-        <style>
+    <!-- Incluindo FontAwesome para os ícones -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- Incluindo o CSS do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
         /* Estilo geral da página */
         body {
             font-family: Arial, sans-serif;
@@ -124,66 +130,130 @@
                 font-size: 18px;
             }
         }
-        .cabecalho{
+
+        .cabecalho {
             display: flex;
             justify-content: space-between;
         }
-        .boasvindas{
+
+        .boasvindas {
             flex-grow: 1;
             text-align: center;
         }
+
+        /* Estilo da imagem do serviço */
+        .servico-imagem {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .servico-imagem img {
+            max-width: 100%;
+            max-height: 200px;
+            object-fit: contain;
+        }
+        .servico-fotos {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        
     </style>
-   
-
 </head>
-    <body>
-       
-            <header class="bg-primary text-white text-center p-4">
-                <div class="cabecalho">
-                    <div class="boasvindas">
-                        <h1>Bem-vindo à Estética Glam!</h1>
-                        <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
-                    </div>
+
+<body>
+
+    <header>
+        <div class="cabecalho">
+            <div class="boasvindas">
+                <h1>Bem-vindo à Estética Glam!</h1>
+                <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Container do Formulário -->
+    <div class="form-container">
+        <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">
+            <i class="fas fa-arrow-left"></i> Voltar
+        </button>
+
+        <!-- Agendamento de Serviços -->
+        <section id="agendamento" class="container mt-5">
+            <h2>Agende seu Serviço</h2>
+            <p>Escolha o serviço, data e horário que melhor atendem a sua necessidade.</p>
+            <form id="agendamentoForm" action="{{ route('agendamento.store') }}" method="POST">
+                @csrf
+
+                <label for="servico" class="form-label" aria-label="Escolha o tipo de serviço">Serviços</label>
+                
+                <select class="form-control" id="servico" name="servico_id" aria-describedby="servico-help">
+                    @foreach($servicos as $servico)
+                        <option value="{{ $servico->id }}" data-img="{{ asset('storage/'.$servico->foto) }}"alt="{{ $servico->tipo_servico }}" >
+                            <i class="fas fa-{{ $servico->icone }}"></i> {{ $servico->tipo_servico }}
+                        </option>
+                    @endforeach
                     
-                    
+                </select>
+                <small id="servico-help" class="form-text text-muted">Escolha o serviço que deseja agendar.</small>
+
+                <!-- Exibição da imagem do serviço -->
+                <div class="servico-imagem">
+                    <img id="servicoImagem" src="" alt="Imagem do serviço" />
                 </div>
-            </header>
 
-        <!-- Container do Formulário -->
-        <div class="form-container">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" name="nome" required>
+                </div>
 
-            
+                <div class="mb-3">
+                    <label for="email" class="form-label">E-mail</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
 
-            <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">Voltar </button>
-           
-             <!-- Agendamento de Serviços -->
-            <section id="agendamento" class="container mt-5">
-                <h2>Agende seu Serviço</h2>
-                <p>Escolha o serviço, data e horário que melhor atendem a sua necessidade.</p>
-                <form action="{{ route('agendamento.store') }}" method="POST">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="servico" class="form-label">Serviço</label>
-                        <select class="form-control" id="servico" name="servico_id">
-                            @foreach($servicos as $servico)
-                                <option value="{{ $servico->id }}">{{ $servico->tipo_servico }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="data" class="form-label">Data</label>
-                        <input type="date" class="form-control" id="data" name="data" required>
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="horario" class="form-label">Horário</label>
-                        <input type="time" class="form-control" id="hora" name="hora" required>
-                    </div>
+                <div class="mb-3">
+                    <label for="data" class="form-label">Data</label>
+                    <input type="date" class="form-control" id="data" name="data" required>
+                </div>
 
-                    <button type="submit" class="btn btn-primary">Agendar</button>
-                </form>
-            </section>
+                <div class="mb-3">
+                    <label for="horario" class="form-label">Horário</label>
+                    <input type="time" class="form-control" id="hora" name="hora" required>
+                </div>
 
-    </body>
+                <button type="submit" class="btn btn-primary">Agendar</button>
+            </form>
+        </section>
+
+        <!-- Mensagens de sucesso ou erro -->
+        @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if(session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+    </div>
+
+    <!-- Incluindo o JS do Bootstrap -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script para exibir a imagem do serviço selecionado -->
+    <script>
+        document.getElementById('servico').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var imgSrc = selectedOption.getAttribute('data-img');
+            document.getElementById('servicoImagem').src = imgSrc;
+        });
+    </script>
+
+</body>
 </html>

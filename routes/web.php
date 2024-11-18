@@ -13,6 +13,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Route::get('/historico', [AgendamentoController::class, 'index'])->name('historico');
 Route::get('/', [AgendamentoController::class, 'index'])->name('Home.index');
 Route::get('/agendamento/create', [AgendamentoController::class, 'create'])->name('novo_agendamento');
 Route::post('/agendamento', [AgendamentoController::class, 'store'])->name('agendamento.store');
@@ -23,9 +24,16 @@ Route::post('/feedbacks', [FeedbackController::class, 'store'])->name('feedback.
 Route::get('/profissionais/create', [ProfissionalController::class, 'create'])->name('profissionais.create');
 Route::post('/profissionais', [ProfissionalController::class, 'store'])->name('profissionais.store');
 
+Route::get('/servicos', [ServicoController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/create', [ServicoController::class, 'create'])->name('servicos.create');
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
+
+
+
+
+
+
 
 
 
