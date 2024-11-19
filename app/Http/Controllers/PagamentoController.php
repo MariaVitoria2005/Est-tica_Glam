@@ -50,7 +50,17 @@ class PagamentoController
      */
     public function store(Request $request)
     {
-       
+        $validated = $request->validate([
+            'metodo_pagamento' => 'required|string',
+        ]);
+    
+        $pagamento = new Pagamento();
+        $pagamento->metodo_pagamento = $request->metodo_pagamento;
+        // Adicionar outros campos conforme necessário
+        $pagamento->save();
+    
+        return redirect()->route('pagamentos_index')->with('success', 'Pagamento confirmado!');
+        
     }
 
     /**

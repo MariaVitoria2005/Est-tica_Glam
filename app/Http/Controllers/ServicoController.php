@@ -13,7 +13,6 @@ class ServicoController
     public function index()
     {
         $servicos = Servico::all();
-
         return view('servicos.index', compact('servicos'));
        
     }
@@ -51,11 +50,9 @@ class ServicoController
      */
     public function show( $id)
     {
-        $servico = Servico::findOrFail($id);  // Encontra o serviço pelo ID
-        return view('servicos.show', compact('servico'));
-
+        $servico = Servico::findOrFail($id);
         
-     
+        return view('servicos.show', compact('servico'));
     }
 
     /**

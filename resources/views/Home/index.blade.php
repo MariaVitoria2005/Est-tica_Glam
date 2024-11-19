@@ -6,9 +6,11 @@
     <title>Minha Página Principal</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+
     <style>
-         /* Estilos para o modo de alto contraste */
-        .alto-contraste {
+          /* Estilos para o modo de alto contraste */
+          .alto-contraste {
             background-color: #000 !important;
             color: #FFF !important;
         }
@@ -268,16 +270,49 @@
         }
 
         
+               /* Esconde os inputs de radio */
+    .stars input {
+        display: none;
+    }
+
+        /* Estilo das estrelas */
+        .stars label {
+            font-size: 40px;               /* Tamanho das estrelas */
+            color: #ccc;                   /* Cor padrão das estrelas (cinza claro) */
+            cursor: pointer;              /* Altera o cursor quando passar sobre as estrelas */
+            transition: color 0.3s ease;   /* Efeito suave na transição de cor */
+        }
+
+        /* Cor das estrelas quando o mouse passa por cima */
+        .stars label:hover,
+        .stars label:hover ~ label {
+            color: #f39c12;               /* Cor dourada quando passa o mouse */
+        }
+
+        /* Cor das estrelas quando selecionadas */
+        .stars input:checked ~ label {
+            color: #FFD700;              /* Cor dourada para as estrelas selecionadas */
+        }
+
+        /* Quando o radio é marcado, as estrelas à esquerda também ficam douradas */
+        .stars input:checked + label,
+        .stars input:checked + label + label,
+        .stars input:checked + label + label + label,
+        .stars input:checked + label + label + label + label {
+            color: #f39c12;               /* Cor dourada */
+        }
+       
+
     </style>
+
+
+        
+  
+         
+
 </head>
     <body>
-            <!-- Header -->
-            <header class="bg-primary text-white  text-center p-4">
-                <!-- fixed-top -->
-                <div class="cabecalho">
-                    
-                     
-            </header>
+            
             <nav>
                 <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100"> <!-- Substitua com o caminho da sua logo -->
                     <ul class="nav-links">
@@ -307,12 +342,29 @@
 
             
             <div class="stars">
-            <input type="radio" name="rating" id="star1"><label for="star1"></label>
-            <input type="radio" name="rating" id="star2"><label for="star2"></label>
-            <input type="radio" name="rating" id="star3"><label for="star3"></label>
-            <input type="radio" name="rating" id="star4"><label for="star4"></label>
-            <input type="radio" name="rating" id="star5"><label for="star5"></label>
+                <input type="radio" name="rating" id="star1"><label for="star1" class="fa fa-star"></label>
+                <input type="radio" name="rating" id="star2"><label for="star2" class="fa fa-star"></label>
+                <input type="radio" name="rating" id="star3"><label for="star3" class="fa fa-star"></label>
+                <input type="radio" name="rating" id="star4"><label for="star4" class="fa fa-star"></label>
+                <input type="radio" name="rating" id="star5"><label for="star5" class="fa fa-star"></label>
             </div>
+
+
+            <div class="rating-value">
+                <p>Avaliação: <span id="rating-num">0</span> estrelas</p>
+            </div>
+
+            <script>
+                const stars = document.querySelectorAll('.stars input');
+                const ratingValue = document.getElementById('rating-num');
+
+                stars.forEach(star => {
+                    star.addEventListener('change', () => {
+                        ratingValue.textContent = star.id.replace('star', '');
+                    });
+                });
+            </script>
+
 
             <div class="search-bar">
                 <input type="text" placeholder="Pesquise por serviços...">
@@ -363,7 +415,7 @@
                         </ul>
                     </div>
 
-                    <!-- Foto e nome da Profissional -->
+                     <!-- Foto e nome da Profissional -->
                     <div class="col-md-4 profissional-col">
                         <div class="profissional-info">
                             @foreach($profissionais as $profissional)
@@ -373,7 +425,7 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
+                    </div> 
                 </div>
             </section>
             
@@ -414,7 +466,7 @@
             </section>
 
           
-            <!-- Feedbacks de Clientes
+            <!-- Feedbacks de Clientes -->
             <section id="feedbacks" class="container mt-5">
                 <h2>O que nossos clientes dizem</h2>
                 <div class="row">
@@ -424,13 +476,14 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $feedback->cliente->nome }}</h5>
                                     <p class="card-text">"{{ $feedback->comentario }}"</p>
+                                    <p class="card-text">Nota:"{{ $feedback->nota }}"</p>
                                     <p class="card-text"><strong>Avaliação:</strong> {{ $feedback->avaliacao }} ★</p>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-            </section> -->
+            </section>
 
             <!-- Formulário de Feedback -->
             <section id="deixar-feedback" class="container mt-5">
@@ -521,6 +574,7 @@
                     </div>
                 </div>
             </div>
+            
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         
             <!-- JavaScript para abrir/fechar a sidebar -->

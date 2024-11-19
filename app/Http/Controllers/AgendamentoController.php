@@ -61,9 +61,10 @@ class AgendamentoController
     /**
      * Display the specified resource.
      */
-    public function show(Agendamento $agendamento)
+    public function show(Agendamento $id)
     {
-        //
+        $agendamentos = Agendamento::findOrFail($id);  // Encontra o serviço pelo ID
+        return view('agendamentoss.show', compact('agendamentos'));
     }
 
     /**

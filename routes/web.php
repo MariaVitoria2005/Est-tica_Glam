@@ -24,6 +24,8 @@ Route::post('/feedbacks', [FeedbackController::class, 'store'])->name('feedback.
 Route::get('/profissionais/create', [ProfissionalController::class, 'create'])->name('profissionais.create');
 Route::post('/profissionais', [ProfissionalController::class, 'store'])->name('profissionais.store');
 
+// routes/web.php
+
 Route::get('/servicos', [ServicoController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/create', [ServicoController::class, 'create'])->name('servicos.create');
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
@@ -31,18 +33,8 @@ Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos
 
 
 
-
-
-
-
-
-
-
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos_index');
 Route::get('/pagamentos/{id}', [PagamentoController::class, 'show'])->name('pagamentos.show');
-
-
-
 
 
 Route::middleware('auth')->group(function () {

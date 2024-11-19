@@ -156,7 +156,7 @@
             margin-top: 20px;
             text-align: center;
         }
-
+        
         
     </style>
 </head>
@@ -174,9 +174,10 @@
 
     <!-- Container do Formulário -->
     <div class="form-container">
-        <button class="btn btn-outline-secondary" onclick="window.location.href='{{ url('/') }}';">
+        <button class="btn btn-secondary btn-voltar" onclick="window.location.href='{{ url('/') }}';">
             <i class="fas fa-arrow-left"></i> Voltar
         </button>
+
 
         <!-- Agendamento de Serviços -->
         <section id="agendamento" class="container mt-5">
@@ -186,43 +187,43 @@
                 @csrf
 
                 <label for="servico" class="form-label" aria-label="Escolha o tipo de serviço">Serviços</label>
-                
-                <select class="form-control" id="servico" name="servico_id" aria-describedby="servico-help">
+                <select class="form-control" id="servico" name="servico_id" aria-describedby="servico-help" aria-label="Selecione o serviço">
                     @foreach($servicos as $servico)
-                        <option value="{{ $servico->id }}" data-img="{{ asset('storage/'.$servico->foto) }}"alt="{{ $servico->tipo_servico }}" >
+                        <option value="{{ $servico->id }}" data-img="{{ asset('storage/'.$servico->foto) }}" alt="{{ $servico->tipo_servico }}">
                             <i class="fas fa-{{ $servico->icone }}"></i> {{ $servico->tipo_servico }}
                         </option>
                     @endforeach
-                    
                 </select>
+
                 <small id="servico-help" class="form-text text-muted">Escolha o serviço que deseja agendar.</small>
 
                 <!-- Exibição da imagem do serviço -->
                 <div class="servico-imagem">
-                    <img id="servicoImagem" src="" alt="Imagem do serviço" />
+                <!-- Inicialmente a imagem está vazia, será preenchida via JS -->
+                    <img id="servicoImagem" src="{{ asset('storage/'.$servico->foto) }}" alt="Imagem do serviço" />
                 </div>
 
+                <!-- Exibição da imagem do serviço -->
                 <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
+                    <label for="nome" class="form-label"><i class="fas fa-user"></i> Nome</label>
                     <input type="text" class="form-control" id="nome" name="nome" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                    <label for="email" class="form-label"><i class="fas fa-envelope"></i> E-mail</label>
+                    <input type="text" class="form-control" id="email" name="email" required>
                 </div>
 
-
-
                 <div class="mb-3">
-                    <label for="data" class="form-label">Data</label>
+                    <label for="data" class="form-label"><i class="fas fa-calendar-alt"></i> Data</label>
                     <input type="date" class="form-control" id="data" name="data" required>
                 </div>
 
                 <div class="mb-3">
-                    <label for="horario" class="form-label">Horário</label>
+                    <label for="hora" class="form-label"><i class="fas fa-clock"></i> Horário</label>
                     <input type="time" class="form-control" id="hora" name="hora" required>
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">Agendar</button>
             </form>
@@ -240,7 +241,7 @@
                 {{ session('error') }}
             </div>
         @endif
-
+            
     </div>
 
     <!-- Incluindo o JS do Bootstrap -->
@@ -254,6 +255,5 @@
             document.getElementById('servicoImagem').src = imgSrc;
         });
     </script>
-
 </body>
 </html>

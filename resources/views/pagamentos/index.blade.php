@@ -66,8 +66,6 @@
 <div class="container">
     <h1 class="text-center">Índice de Pagamentos</h1>
 
-    
-
     <!-- Formulário de Filtro -->
     <form method="GET" action="{{ route('pagamentos_index') }}" class="mb-3">
         <div class="row">
@@ -90,20 +88,37 @@
         <div class="list-group">
             <a href="{{ route('pagamentos.show', $pagamento->id) }}" class="list-group-item list-group-item-action">
                 <strong>{{ $pagamento->status }}</strong> - R$ {{ number_format($pagamento->valor, 2, ',', '.') }} <br>
+                
+                <!-- Exibição do Método de Pagamento -->
+                <small><strong>Método de Pagamento:</strong> 
+                    @switch($pagamento->metodo_pagamento)
+                        @case('cartao')
+                            Cartão de Crédito
+                            @break
+                        @case('boleto')
+                            Boleto
+                            @break
+                        @case('pix')
+                            Pix
+                            @break
+                        @default
+                            Não especificado
+                    @endswitch
+                </small><br>
+
                 @if($pagamento->created_at)
                     <small>Data de pagamento: {{ $pagamento->created_at->format('d/m/Y H:i') }}</small>
                 @else
                     <small>Data de pagamento: Não disponível</small>
                 @endif
             </a>
-    
         </div>
-    
     @endforeach
-        <!-- Botão para voltar à página principal com ícone -->
-        <button class="btn btn-back" onclick="window.location.href='{{ url('/') }}';">
-            <i class="fas fa-arrow-left"></i> Voltar
-        </button>
+
+    <!-- Botão para voltar à página principal com ícone -->
+    <button class="btn btn-back" onclick="window.location.href='{{ url('/') }}';">
+        <i class="fas fa-arrow-left"></i> Voltar
+    </button>
         
     <!-- Paginação -->
     <div class="pagination justify-content-center">
@@ -115,6 +130,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
 
 
 
