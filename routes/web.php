@@ -33,6 +33,9 @@ Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos
 
 
 
+Route::get('/servico/{id}', [ServicoController::class, 'detalhes'])->name('detalhes_servico');
+
+
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos_index');
 Route::get('/pagamentos/{id}', [PagamentoController::class, 'show'])->name('pagamentos.show');
 
