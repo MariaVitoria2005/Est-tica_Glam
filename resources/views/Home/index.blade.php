@@ -429,6 +429,7 @@
                     <h3>Bem-vindo, {{ Auth::user()->name }}!</h3>
                     <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="rounded-circle" width="150">
                 </section>
+                
             @endif
 
             <!-- Serviços Disponíveis -->
@@ -449,7 +450,7 @@
                         <a href="{{ route('novo_agendamento') }}" class="btn btn-outline-primary">
                             <i class="fas fa-calendar-check"></i> Agendar
                         </a>
-                        <a href="{{ route('servicos.show', $servico->id) }}" class="btn btn-success">
+                        <a href="{{ route('detalhes_servico', $servico->id) }}" class="btn btn-success">
                             <i class="fas fa-info-circle"></i> Detalhes
                         </a>
                     </div>

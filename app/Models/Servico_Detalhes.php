@@ -8,6 +8,8 @@ class Servico_Detalhes extends Model
 {   
     use HasFactory;
 
+    protected $table = 'servico_detalhes';
+
     protected $fillable = ['nome','descricao','valor','servico_id','foto','status'];
 
     public function servico()

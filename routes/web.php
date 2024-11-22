@@ -7,6 +7,7 @@ use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\Servico_DetalhesController;
 
 
 Route::get('/dashboard', function () {
@@ -31,9 +32,7 @@ Route::get('/servicos/create', [ServicoController::class, 'create'])->name('serv
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
 
-
-
-Route::get('/servico/{id}', [ServicoController::class, 'detalhes'])->name('detalhes_servico');
+Route::get('/servico/{id}', [Servico_DetalhesController::class, 'detalhes'])->name('detalhes_servico');
 
 
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos_index');
