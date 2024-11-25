@@ -26,6 +26,7 @@
             justify-content: center; /* Alinha o conteúdo no centro horizontalmente */
             align-items: center; /* Alinha o conteúdo no centro verticalmente */
             height: 100px; /* Ajuste a altura do cabeçalho do card */
+          
         }
 
         /* Garantir que a imagem ocupe o topo do card e fique bem alinhada */
@@ -71,34 +72,72 @@
             <i class="fas fa-arrow-left"></i> Voltar
         </button>
 
-        <div class="row">
+        <div class="row mt-4">
             @foreach ($servicosRelacionados as $servicoRelacionado)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <!-- A imagem será centralizada e cobrindo toda a área do card -->
-                        <div class="card-header">
+                        <div class="card-header text-center">
                             <h5>{{ $servicoRelacionado->nome }}</h5> <!-- Nome centralizado -->
                         </div>
                         
                         <div class="card-body">
+                            <!-- Imagem do serviço -->
                             <img src="{{ asset('storage/' . $servicoRelacionado->foto) }}" class="card-img-top" alt="{{ $servicoRelacionado->nome }}">
-                            <p><strong>Descrição:</strong> {{ $servicoRelacionado->descricao }}</p>
-                            <p><strong>Valor:</strong> R$ {{ number_format($servicoRelacionado->valor, 2, ',', '.') }}</p>
-                            <div class="d-flex justify-content-between">
                             
-                        </div>
+                            <!-- Descrição e valor -->
+                            <p><strong>Descrição:</strong> {{ Str::limit($servicoRelacionado->descricao, 100) }}</p>
+                            <p><strong>Valor:</strong> R$ {{ number_format($servicoRelacionado->valor, 2, ',', '.') }}</p>
 
+                            <!-- Botão para agendar -->
+                            <div class="d-flex justify-content-between align-items-center">
+                               
+
+                                <!-- Ver detalhes (abre modal) -->
+                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDetalhes{{ $servicoRelacionado->id }}">
+                                    Ver Detalhes
+                                </button>
+                                <a href="{{ route('novo_agendamento') }}" class="btn btn-outline-primary">
+                                    <i class="fas fa-calendar-check"></i> Agendar
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal para exibir detalhes do serviço -->
+                <div class="modal fade" id="modalDetalhes{{ $servicoRelacionado->id }}" tabindex="-1" aria-labelledby="modalDetalhesLabel{{ $servicoRelacionado->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalDetalhesLabel{{ $servicoRelacionado->id }}">{{ $servicoRelacionado->nome }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Imagem do serviço em tamanho maior -->
+                                <img src="{{ asset('storage/' . $servicoRelacionado->foto) }}" class="img-fluid mb-3" alt="{{ $servicoRelacionado->nome }}">
+
+                                <!-- Descrição completa -->
+                                <p><strong>Descrição Completa:</strong></p>
+                                <p>{{ $servicoRelacionado->descricao }}</p>
+
+                                <!-- Valor do serviço -->
+                                <p><strong>Valor:</strong> R$ {{ number_format($servicoRelacionado->valor, 2, ',', '.') }}</p>
+
+                                <!-- Botão para agendar -->
+                                 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             @endforeach
         </div>
-
-
     </div>
 
     <!-- Link para o script do Bootstrap 5 -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
 

@@ -6,6 +6,7 @@ use App\Models\Pagamento;
 use Illuminate\Http\Request;
 use App\Models\Agendamento;
 use App\Models\Cliente;
+use App\Models\Servico;
 
 class PagamentoController
 {
@@ -15,6 +16,12 @@ class PagamentoController
     
     public function index(Request $request)
     {
+        $servicos = Servico::all();
+        $clientes = Cliente::all();
+        $agendamentos = Agendamento::all();
+        $status = ['pago','pedente','cancelado'];
+
+
         // Captura o valor do status da requisição (caso exista)
         $status = $request->get('status');
         
@@ -27,7 +34,7 @@ class PagamentoController
         }
 
         // Retorna a view com os pagamentos e o filtro aplicado
-        return view('pagamentos.index', compact('pagamentos', 'status'));
+        return view('pagamentos.index', compact('pagamentos', 'status',  'clientes', 'agendamentos', 'servicos'));
 
 
     }
@@ -37,12 +44,9 @@ class PagamentoController
      */
     public function create()
     {
-       
-        $clientes = Cliente::all();
-        $agendamentos = Agendamento::all();
-        $status = ['pago','pedente','cancelado'];
+        
 
-        return view('pagamentos.index',['status' =>$status, 'clientes'=>$clientes, 'agendamentos'=>$agendamentos]);
+       
     }
 
     /**

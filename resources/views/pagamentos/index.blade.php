@@ -64,76 +64,68 @@
 <body>
   
 <div class="container">
-    <h1 class="text-center">Índice de Pagamentos</h1>
+    <h1 class="text-center">Agendamento e Pagamento</h1>
 
-    <!-- Formulário de Filtro -->
-    <form method="GET" action="{{ route('pagamentos_index') }}" class="mb-3">
-        <div class="row">
-            <div class="col-md-6">
-                <select name="status" class="form-select">
-                    <option value="">Selecione o Status</option>
-                    <option value="Pago" {{ request('status') == 'Pago' ? 'selected' : '' }}>Pago</option>
-                    <option value="concluido" {{ request('status') == 'concluido' ? 'selected' : '' }}>Concluído</option>
-                    <option value="cancelado" {{ request('status') == 'cancelado' ? 'selected' : '' }}>Cancelado</option>
-                </select>
-            </div>
-            <div class="col-md-6">
-                <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-            </div>
+    <!-- Formulário de Agendamento e Pagamento -->
+    <form method="POST" action="{{ route('agendamento.store') }}" class="mb-3">
+        @csrf
+
+        <!-- Seleção de Serviço -->
+        <div class="mb-3">
+            <label for="servico" class="form-label">Escolha o Serviço</label>
+            <select name="servico_id" class="form-select" required>
+                <option value="">Selecione um Serviço</option>
+                @foreach($servicos as $servico)
+                    <option value="{{ $servico->id }}">{{ $servico->tipo_servico }} - R$ {{ number_format($servico->valor, 2, ',', '.') }}</option>
+                @endforeach
+            </select>
         </div>
+
+        <!-- Seleção de Forma de Pagamento -->
+        <div class="mb-3">
+            <label for="metodo_pagamento" class="form-label">Forma de Pagamento</label>
+            <select name="metodo_pagamento" class="form-select" required>
+                <option value="">Selecione a Forma de Pagamento</option>
+                <option value="cartao">Cartão de Crédito</option>
+                <option value="cartao">Cartão de Débito</option>
+                <option value="dinehrio">Dinheiro</option>
+                <option value="pix">Pix</option>
+            </select>
+        </div>
+
+        <!-- Dados do Cliente -->
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" required>
+        </div>
+
+
+        <div class="mb-3">
+            <label for="data" class="form-label">Data do Agendamento</label>
+            <input type="date" class="form-control" id="data" name="data" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="hora" class="form-label">Hora do Agendamento</label>
+            <input type="time" class="form-control" id="hora" name="hora" required>
+        </div>
+
+        <!-- Botão de Submissão -->
+        <button type="submit" class="btn btn-primary w-100">Agendar e Pagar</button>
     </form>
 
-    <!-- Listagem de Pagamentos -->
-    @foreach($pagamentos as $pagamento)
-        <div class="list-group">
-            <a href="{{ route('pagamentos.show', $pagamento->id) }}" class="list-group-item list-group-item-action">
-                <strong>{{ $pagamento->status }}</strong> - R$ {{ number_format($pagamento->valor, 2, ',', '.') }} <br>
-                
-                <!-- Exibição do Método de Pagamento -->
-                <small><strong>Método de Pagamento:</strong> 
-                    @switch($pagamento->metodo_pagamento)
-                        @case('cartao')
-                            Cartão de Crédito
-                            @break
-                        @case('boleto')
-                            Boleto
-                            @break
-                        @case('pix')
-                            Pix
-                            @break
-                        @default
-                            Não especificado
-                    @endswitch
-                </small><br>
-
-                @if($pagamento->created_at)
-                    <small>Data de pagamento: {{ $pagamento->created_at->format('d/m/Y H:i') }}</small>
-                @else
-                    <small>Data de pagamento: Não disponível</small>
-                @endif
-            </a>
-        </div>
-    @endforeach
-
     <!-- Botão para voltar à página principal com ícone -->
-    <button class="btn btn-back" onclick="window.location.href='{{ url('/') }}';">
+    <button class="btn btn-secondary mt-3" onclick="window.location.href='{{ url('/') }}';">
         <i class="fas fa-arrow-left"></i> Voltar
     </button>
-        
-    <!-- Paginação -->
-    <div class="pagination justify-content-center">
-        {{ $pagamentos->appends(['status' => request('status')])->links() }}
-    </div>
+</div>
+
+<!-- Paginação, se necessário -->
+<div class="pagination justify-content-center">
+    {{ $pagamentos->links() }}
 </div>
 
 <!-- Scripts Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-

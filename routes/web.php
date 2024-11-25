@@ -16,7 +16,7 @@ Route::get('/dashboard', function () {
 
 // Route::get('/historico', [AgendamentoController::class, 'index'])->name('historico');
 Route::get('/', [AgendamentoController::class, 'index'])->name('Home.index');
-Route::get('/agendamento/create', [AgendamentoController::class, 'create'])->name('novo_agendamento');
+Route::get('/agendamento/create', [AgendamentoController::class, 'create'])->name('agendamento.create');
 Route::post('/agendamento', [AgendamentoController::class, 'store'])->name('agendamento.store');
 
 Route::get('/feedbacks/create', [FeedbackController::class, 'create'])->name('feedback.create');
@@ -31,6 +31,8 @@ Route::get('/servicos', [ServicoController::class, 'index'])->name('servicos.ind
 Route::get('/servicos/create', [ServicoController::class, 'create'])->name('servicos.create');
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
+
+
 
 Route::get('/servico/{id}', [Servico_DetalhesController::class, 'detalhes'])->name('detalhes_servico');
 

@@ -7,43 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-
     <style>
-          /* Estilos para o modo de alto contraste */
-          .alto-contraste {
-            background-color: #000 !important;
-            color: #FFF !important;
-        }
-        /* header {
-            background-color: #007bff;
-            padding: 20px;
-            color: white;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        } */
-
-        .alto-contraste header {
-            background-color: #333 !important;
-        }
-
-        .btn-contraste {
-            background-color: #ffcc00;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-         /* Mudança na cor do botão de Alto Contraste quando no modo de alto contraste */
-         .alto-contraste .btn-contraste {
-            background-color: #000; /* Fundo escuro */
-            color: #ffcc00; /* Texto amarelo */
-        }
-
-        .btn-contraste:hover {
-            background-color: #e6b800;
-        }
         .sidebar {
             position: fixed;
             top: 0;
@@ -87,42 +51,7 @@
         .btn-sidebar:hover {
             background-color: #0056b3;
         }
-
-        .sidebar .icon {
-            margin-right: 10px;
-        } 
-
-         /* Cor do cabeçalho */
-        header {
-            background-color: #007bff;
-            padding: 20px;
-            color: white;
-            position: relative; 
-        }
         
-        body {
-            padding-left: 0; /* Remove o padding em telas pequenas */
-            transition: padding-left 0.3s ease;     
-        }
-
-        footer {
-            margin-left: 0; /* Remove a margem do rodapé em telas pequenas */
-            transition: margin-left 0.3s ease;
-            
-        }
-
-        /* Ajustes no layout para telas pequenas */
-        @media (max-width: 767px) {
-           
-            .sidebar {
-                left: -100%;
-            }
-            body {
-                padding-left: 0;
-                
-            }
-            
-        }
         .modal-dialog {
             position: fixed;
             top: 0;
@@ -133,9 +62,9 @@
         /* Posicionar o botão no canto superior direito */
         .btn-open-modal {
             position: fixed;
-            /*top: 20px;*/
-            /*right: 20px;*/
-            z-index: 1051; /* Um z-index maior para garantir que o botão fique acima de outros elementos */
+            top: 20px;
+            right: 20px;
+            z-index: 1051; 
         }
 
         /* Opcional: adicionar um z-index alto para garantir que o modal fique acima de outros elementos */
@@ -143,41 +72,35 @@
             z-index: 1050;  /* Pode ser ajustado conforme necessário */
         }
 
-        .cabecalho{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            
+        nav .logo {
+            display: block;
+            margin: 0 auto; /* Centraliza a logo */
         }
-        .logo {
-            margin-left: 50px; 
-            /* Ajuste a margem para mover o logo para a direita */
-        }
-        .entrar{
+        /* .entrar{
             margin-left: auto;
-        }
+        } */
 
         .boasvindas{
             flex-grow: 1;
             margin-left: 50px;
         }
         
-        .profissional-img {
+        /* .profissional-img {
             width: 80px;  
             height: 100px; 
-            border-radius: 50%; /* Torna a imagem redonda */
-        }
+            border-radius: 50%;
+        } */
 
-        .profissional-info {
+        /* .profissional-info {
             display: flex;
             align-items: center;
-            justify-content: flex-end; /* Alinha a imagem e o nome da profissional à direita */
-        }
+            justify-content: flex-end; 
+        } */
 
-        .profissional-nome {
+        /* .profissional-nome {
             font-size: 1.2rem;
             margin-left: 15px;
-        }
+        } */
 
         /* Ajustes no layout para telas pequenas */
         @media (max-width: 767px) {
@@ -191,47 +114,21 @@
             }
         }
         
-        nav {
-            background-color: #007bff;
+        /* nav {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
+            justify-content: space-between; Distribui o conteúdo com espaço entre os itens 
+            align-items: center; Alinha os itens verticalmente no centro 
+            padding: 10px 20px; Adiciona espaçamento interno 
+            background-color: #fff; Cor de fundo, altere conforme necessário 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); Sombras sutis 
+        } */
 
-        .nav-links {
+        /* .nav-links {
             list-style-type: none;
             display: flex;
             margin: 0;
             padding: 0;
-        }
-
-        .nav-links li {
-            margin: 0 15px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #ffcc00; /* Cor de destaque ao passar o mouse */
-        }
-
-        /* Menu Hambúrguer */
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
-            color: white;
-        }
+        } */
 
         /* Menu Responsivo */
         @media (max-width: 768px) {
@@ -260,81 +157,167 @@
             }
         }
 
-        /* Animação do menu */
-        nav a {
-            transition: transform 0.3s ease;
+        /* Estilos para o cabeçalho de navegação */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px ;
+            background-color: #fff; /* Cor de fundo do cabeçalho */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        nav a:hover {
-            transform: scale(1.1); /* Aumenta os links ao passar o mouse */
+        /* Links de navegação */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
         }
 
-        
-               /* Esconde os inputs de radio */
-    .stars input {
-        display: none;
-    }
+        /* Estilos para os links da navegação */
+        .nav-links li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
 
-        /* Estilo das estrelas */
+        /* Estilos para o menu hambúrguer */
+        .hamburger {
+            display: none; /* Será mostrado em telas menores */
+        }
+
+        /* Estilos para a área de login e contrastes */
+        .entrar {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Estilos para o novo cabeçalho com boas-vindas */
+        header.boasvindas {
+            background-color: #f4f4f4; /* Cor de fundo para destacar a área */
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra leve para destacar */
+        }
+
+        .stars input[type="radio"] {
+            display: none; /* Esconde os inputs */
+        }
+
         .stars label {
-            font-size: 40px;               /* Tamanho das estrelas */
-            color: #ccc;                   /* Cor padrão das estrelas (cinza claro) */
-            cursor: pointer;              /* Altera o cursor quando passar sobre as estrelas */
-            transition: color 0.3s ease;   /* Efeito suave na transição de cor */
+            font-size: 1rem;
+            color: #ccc; /* Cor inicial das estrelas */
+            cursor: pointer;
+            transition: color 0.3s ease;
         }
 
-        /* Cor das estrelas quando o mouse passa por cima */
+
         .stars label:hover,
         .stars label:hover ~ label {
-            color: #f39c12;               /* Cor dourada quando passa o mouse */
+            color: #f39c12; /* Destaque dourado ao passar o mouse sobre as estrelas */
         }
 
-        /* Cor das estrelas quando selecionadas */
-        .stars input:checked ~ label {
-            color: #FFD700;              /* Cor dourada para as estrelas selecionadas */
+        /* Exibição do valor da avaliação */
+        .rating-value {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #333;
         }
 
-        /* Quando o radio é marcado, as estrelas à esquerda também ficam douradas */
-        .stars input:checked + label,
-        .stars input:checked + label + label,
-        .stars input:checked + label + label + label,
-        .stars input:checked + label + label + label + label {
-            color: #f39c12;               /* Cor dourada */
+        /* Adiciona espaçamento entre a navegação e o cabeçalho de boas-vindas */
+        nav + header.boasvindas {
+            margin-top: 20px;
         }
-       
 
+        /* Adicionando animação nos ícones */
+        /* .redes-col .btn-link:hover i {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        } */
+
+        /* Estilo da seção de endereço */
+        #sobre-nos {
+            background-color: #f7f7f7; /* Cor de fundo suave para destacar a seção */
+            border-radius: 8px; /* Bordas arredondadas para dar um efeito suave */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar a seção */
+            padding: 40px 0; /* Espaçamento superior e inferior */
+        }
+
+        /* Estilo do título */
+        .endereco-titulo {
+            font-family: 'Arial', sans-serif; /* Fonte limpa e legível */
+            font-size: 2rem; /* Tamanho do título */
+            font-weight: bold; /* Título em negrito */
+            color: #333; /* Cor do texto */
+            margin-bottom: 20px; /* Espaçamento abaixo do título */
+        }
+
+        /* Estilo do endereço */
+        .endereco-texto {
+            font-size: 1.2rem; /* Tamanho do texto */
+            color: #555; /* Cor do texto */
+            margin-bottom: 15px; /* Espaçamento abaixo do endereço */
+        }
+
+        /* Estilo do horário de funcionamento */
+        .endereco-horario {
+            font-size: 1.1rem; /* Tamanho do texto */
+            color: #007bff; /* Cor azul para o horário de funcionamento */
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .endereco-col {
+                padding-left: 15px; /* Adiciona algum padding nas colunas menores */
+                padding-right: 15px;
+            }
+
+            .endereco-titulo {
+                font-size: 1.5rem; /* Ajusta o tamanho do título em telas menores */
+            }
+
+            .endereco-texto {
+                font-size: 1rem; /* Ajusta o tamanho do texto */
+            }
+
+            .endereco-horario {
+                font-size: 1rem; /* Ajusta o tamanho do horário */
+            }
+        }
     </style>
 </head>
     <body>
-            
             <nav>
                 <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100"> <!-- Substitua com o caminho da sua logo -->
-                    <ul class="nav-links">
-                        <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
-                        <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
-                        <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
-                    </ul>
-                    <div class="hamburger" id="hamburger-icon">
-                        <i class="fas fa-bars"></i> <!-- Ícone de Menu Hambúrguer -->
-                    </div>
-                    <div class="boasvindas">
-                                <h1>Bem-vindo à Estética Glam!</h1>
-                                <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
-                    </div>
-                            
-                    <div class="entrar">
-                        <div> 
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                Login
-                            </button>
-                                    
-                            <button class="btn btn-contraste" id="toggleContrast">Alto Contraste</button>
-                        </div>
-                    </div>
-            </nav>
-            
+                <ul class="nav-links">
+                    <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
+                    <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
+                    <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
+                    <!-- Link de Navegação para Endereço -->
+                    <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
 
-            
+                </ul>
+                <div class="hamburger" id="hamburger-icon">
+                    <i class="fas fa-bars"></i> <!-- Ícone de Menu Hambúrguer -->
+                </div>
+                <div class="entrar">
+                    <div> 
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            Login
+                        </button>
+                        
+                        <a href="/register" class="ms-lg-3 btn btn-primary-outline">Cadastre-se</a>
+                    </div>
+                </div>
+            </nav>  
+
+
+
+        <!-- Novo cabeçalho com título e estrelas abaixo do cabeçalho de navegação -->
+        <header class="boasvindas">
+            <h1>Bem-vindo à Estética Glam!</h1>
+            <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
+
+            <!-- Estrelas de avaliação -->
             <div class="stars">
                 <input type="radio" name="rating" id="star1"><label for="star1" class="fa fa-star"></label>
                 <input type="radio" name="rating" id="star2"><label for="star2" class="fa fa-star"></label>
@@ -343,11 +326,10 @@
                 <input type="radio" name="rating" id="star5"><label for="star5" class="fa fa-star"></label>
             </div>
 
-
+            <!-- Exibição da avaliação -->
             <div class="rating-value">
                 <p>Avaliação: <span id="rating-num">0</span> estrelas</p>
             </div>
-
             <script>
                 const stars = document.querySelectorAll('.stars input');
                 const ratingValue = document.getElementById('rating-num');
@@ -360,10 +342,11 @@
             </script>
 
 
-            <div class="search-bar">
-                <input type="text" placeholder="Pesquise por serviços...">
-                <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
-            </div>
+                    <!-- <div class="search-bar">
+                        <input type="text" placeholder="Pesquise por serviços...">
+                        <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+                    </div> -->
+        </header> 
 
             <!-- Botão para abrir a sidebar -->
             <button class="btn-sidebar" id="sidebarToggle">
@@ -379,58 +362,66 @@
                 <a href="#historico"><i class="fas fa-history"></i> Histórico de Agendamento</a>
             </div>           
 
-            <!-- Redes Sociais -->
-            <section id="redes-sociais" class="container mt-4">
-                <div class="row">
                     <!-- Redes Sociais -->
-                    <div class="col-md-8 redes-col">
-                        <h2>Nos acompanhe nas redes sociais!</h2>
-                        <ul class="list-inline">
-                            <li class="list-inline-item">
-                                <a href="https://facebook.com/suaempresa" class="btn btn-link" target="_blank">
-                                    <i class="fab fa-facebook-square fa-3x text-primary"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://instagram.com/https://https://www.instagram.com/estetica_glam2025/" class="btn btn-link" target="_blank">
-                                    <i class="fab fa-instagram-square fa-3x text-danger"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://twitter.com/suaempresa" class="btn btn-link" target="_blank">
-                                    <i class="fab fa-twitter-square fa-3x text-info"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a href="https://wa.me/+5586988969563" class="btn btn-link" target="_blank">
-                                    <i class="fab fa-whatsapp fa-3x text-success"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                     <!-- Foto e nome da Profissional -->
-                    <div class="col-md-4 profissional-col">
-                        <div class="profissional-info">
-                            @foreach($profissionais as $profissional)
-                                <img src="{{ asset('storage/' .$profissional->foto) }}" class="profissional-img" alt="{{ $profissional->nome }}">
-                                <div>
-                                    <h5 class="profissional-nome">{{ $profissional->nome }}</h5>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div> 
+                    <section id="redes-sociais" class="container mt-4">
+            <div class="row">
+                <!-- Redes Sociais -->
+                <div class="col-md-8 redes-col">
+                    <h2>Nos acompanhe nas redes sociais e fique por dentro das novidades!</h2>
+                    <p>Não perca nossas promoções exclusivas, dicas de beleza e muito mais! Siga-nos nas redes sociais.</p>
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a href="https://facebook.com/suaempresa" class="btn btn-link" target="_blank">
+                                <i class="fab fa-facebook-square fa-3x text-primary"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/estetica_glam2025/" class="btn btn-link" target="_blank">
+                                <i class="fab fa-instagram-square fa-3x text-danger"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/suaempresa" class="btn btn-link" target="_blank">
+                                <i class="fab fa-twitter-square fa-3x text-info"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://wa.me/+5586988969563" class="btn btn-link" target="_blank">
+                                <i class="fab fa-whatsapp fa-3x text-success"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <button class="btn btn-link" onclick="copyLink()">
+                                <i class="fas fa-link fa-3x text-muted"></i>
+                            </button>
+                        </li>
+                    </ul>
                 </div>
-            </section>
+            </div>
+        </section>
+           
+           
+
+
+
+        <script>
+            function copyLink() {
+                navigator.clipboard.writeText(window.location.href).then(function() {
+                    alert('Link copiado para a área de transferência!');
+                });
+            }
+        </script>
+
             
             <!-- Exibir foto do usuário logado -->
             @if (Auth::check())
                 <section id="usuario-logado" class="text-center mt-5">
-                    <h3>Bem-vindo, {{ Auth::user()->name }}!</h3>
+                    <h3>Bem-vinda, {{ Auth::user()->name }}!</h3>
                     <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="rounded-circle" width="150">
                 </section>
                 
             @endif
+            
 
             <!-- Serviços Disponíveis -->
             <section id="servicos" class="container mt-5">
@@ -498,39 +489,56 @@
                     <button type="submit" class="btn btn-primary">Enviar Feedback</button>
                 </form>
             </section>
-
-            <section id="sobre-nos" class="container mt-5 py-5" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+              <!-- Seção Sobre Nós / Endereço -->
+         <section id="sobre-nos" class="container mt-5 py-5">
                 <div class="row">
-                    <div class="col-12 text-center mb-4">
-                        <h3 class="display-4" style="font-family: 'Arial', sans-serif; color: #333;">Sobre a Estética Glam</h3>
-                        <p class="lead text-muted">A Estética Glam é uma clínica especializada em oferecer tratamentos de beleza de alta qualidade. Nossa missão é proporcionar uma experiência única para nossos clientes, aliando bem-estar e resultados excepcionais.</p>
-                    </div>
-
-                    <div class="col-md-4 text-center">
-                        <div class="icon mb-3">
-                            <i class="fas fa-cogs fa-3x" style="color: #007bff;"></i>
-                        </div>
-                        <h4><strong>Missão</strong></h4>
-                        <p>Oferecer tratamentos estéticos inovadores e personalizados para cada cliente, visando resultados excepcionais.</p>
-                    </div>
-
-                    <div class="col-md-4 text-center">
-                        <div class="icon mb-3">
-                            <i class="fas fa-bullseye fa-3x" style="color: #28a745;"></i>
-                        </div>
-                        <h4><strong>Visão</strong></h4>
-                        <p>Ser a clínica de estética mais renomada e confiável da região, sendo referência em qualidade e resultados.</p>
-                    </div>
-
-                    <div class="col-md-4 text-center">
-                        <div class="icon mb-3">
-                            <i class="fas fa-handshake fa-3x" style="color: #ffc107;"></i>
-                        </div>
-                        <h4><strong>Valores</strong></h4>
-                        <p>Comprometimento, excelência, confiança e respeito, buscando sempre a satisfação total de nossos clientes.</p>
+                    <!-- Informações do endereço -->
+                    <div class="col-md-6 offset-md-3 text-center endereco-col">
+                        <h5 class="endereco-titulo">Visite-nos</h5>
+                        <p class="endereco-texto">Rua São Pedro, 19 - Parque Brasil III, The</p>
+                        <p class="endereco-horario"><strong>Horário de Funcionamento:</strong> Seg - Sex: 7h - 19h</p>
                     </div>
                 </div>
             </section>
+
+
+
+            <section id="sobre-nos" class="container mt-4 py-4" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+    <div class="row">
+        <div class="col-12 text-center mb-3">
+            <h3 class="display-5" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Sobre a Estética Glam</h3>
+            <p class="lead text-muted" style="font-size: 1rem; line-height: 1.4;">A Estética Glam é uma clínica especializada em oferecer tratamentos de beleza de alta qualidade. Nossa missão é proporcionar uma experiência única para nossos clientes, aliando bem-estar e resultados excepcionais.</p>
+        </div>
+
+        <!-- Missão -->
+        <div class="col-md-4 text-center mb-3">
+            <div class="icon mb-2">
+                <i class="fas fa-cogs fa-3x" style="color: #007bff;"></i>
+            </div>
+            <h4 style="font-size: 1.25rem; font-weight: 600;">Missão</h4>
+            <p style="font-size: 0.9rem;">Oferecer tratamentos estéticos inovadores e personalizados para cada cliente, visando resultados excepcionais.</p>
+        </div>
+
+        <!-- Visão -->
+        <div class="col-md-4 text-center mb-3">
+            <div class="icon mb-2">
+                <i class="fas fa-bullseye fa-3x" style="color: #28a745;"></i>
+            </div>
+            <h4 style="font-size: 1.25rem; font-weight: 600;">Visão</h4>
+            <p style="font-size: 0.9rem;">Ser a clínica de estética mais renomada e confiável da região, sendo referência em qualidade e resultados.</p>
+        </div>
+
+        <!-- Valores -->
+        <div class="col-md-4 text-center mb-3">
+            <div class="icon mb-2">
+                <i class="fas fa-handshake fa-3x" style="color: #ffc107;"></i>
+            </div>
+            <h4 style="font-size: 1.25rem; font-weight: 600;">Valores</h4>
+            <p style="font-size: 0.9rem;">Comprometimento, excelência, confiança e respeito, buscando sempre a satisfação total de nossos clientes.</p>
+        </div>
+    </div>
+</section>
+
 
 
             <!-- Modal de Login (apenas visível se o usuário não estiver logado) -->
@@ -569,7 +577,7 @@
                     </div>
                 </div>
             </div>
-            
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
         
             <!-- JavaScript para abrir/fechar a sidebar -->
@@ -594,6 +602,7 @@
                 document.body.classList.toggle('alto-contraste');
             });
         </script>
+       
           <!-- Rodapé -->
         <footer class="bg-dark text-white text-center py-4 mt-5">
             <p>&copy; 2024 Estética Glam. Todos os direitos reservados.</p>

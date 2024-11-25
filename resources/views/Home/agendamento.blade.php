@@ -186,23 +186,7 @@
             <form id="agendamentoForm" action="{{ route('agendamento.store') }}" method="POST">
                 @csrf
 
-                <label for="servico" class="form-label" aria-label="Escolha o tipo de serviço">Serviços</label>
-                <select class="form-control" id="servico" name="servico_id" aria-describedby="servico-help" aria-label="Selecione o serviço">
-                    @foreach($servicos as $servico)
-                        <option value="{{ $servico->id }}" data-img="{{ asset('storage/'.$servico->foto) }}" alt="{{ $servico->tipo_servico }}">
-                            <i class="fas fa-{{ $servico->icone }}"></i> {{ $servico->tipo_servico }}
-                        </option>
-                    @endforeach
-                </select>
-
                 <small id="servico-help" class="form-text text-muted">Escolha o serviço que deseja agendar.</small>
-
-                <!-- Exibição da imagem do serviço -->
-                <div class="servico-imagem">
-                <!-- Inicialmente a imagem está vazia, será preenchida via JS -->
-                    <img id="servicoImagem" src="{{ asset('storage/'.$servico->foto) }}" alt="Imagem do serviço" />
-                </div>
-
                 <!-- Exibição da imagem do serviço -->
                 <div class="mb-3">
                     <label for="nome" class="form-label"><i class="fas fa-user"></i> Nome</label>
