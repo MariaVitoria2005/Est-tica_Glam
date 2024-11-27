@@ -16,9 +16,14 @@ class FeedbackController
      */
     public function index()
     {
-        $feedbacks = Feedback::all();
+        // $feedbacks = Feedback::all();
        
-        return view('Home.index',  compact('feedbacks'));
+        // return view('Home.index',  compact('feedbacks'));
+          // Carrega todos os feedbacks, incluindo o relacionamento com o cliente
+          $feedbacks = Feedback::all();  // Aqui estamos carregando todos os feedbacks, incluindo created_at
+
+          // Retorna a view com os dados dos feedbacks
+          return view('feedbacks.index', compact('feedbacks'));
        
     }
 

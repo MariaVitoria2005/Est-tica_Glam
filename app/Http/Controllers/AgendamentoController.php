@@ -27,14 +27,15 @@ class AgendamentoController
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         $servicos = Servico::all();
+        $servico_id = $request->id;
         $clientes = Cliente::all();
         $profissionais = Profissional::all();
         $status = ['Cancelado','Confirmado','Concluído'];
 
-        return view('Home.agendamento',['servicos' => $servicos, 'clientes' => $clientes, 'profissionais' => $profissionais, 'status' =>$status] );
+        return view('Home.agendamento',['servicos' => $servicos, 'clientes' => $clientes, 'profissionais' => $profissionais, 'status' =>$status, 'servico_id' => $servico_id ]);
 
         
     }
@@ -44,14 +45,14 @@ class AgendamentoController
      */
     public function store(Request $request)
     {
-       $request->validate([
-          'data' => 'required',
-          'hora' => 'required',
-          'cliente_id' => 'required',
-          'servico_id' => 'required',
-          'profissional_id' => 'required',
-          'status' => 'required',
-        ]);
+    //    $request->validate([
+    //       'data' => 'required',
+    //       'hora' => 'required',
+    //       'cliente_id' => 'required',
+    //       'servico_id' => 'required',
+    //       'profissional_id' => 'required',
+    //       'status' => 'required',
+    //     ]);
 
        Agendamento::create($request->all());
        

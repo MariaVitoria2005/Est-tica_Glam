@@ -25,7 +25,7 @@
             display: flex; /* Flexbox para centralizar o conteúdo */
             justify-content: center; /* Alinha o conteúdo no centro horizontalmente */
             align-items: center; /* Alinha o conteúdo no centro verticalmente */
-            height: 100px; /* Ajuste a altura do cabeçalho do card */
+            height: 50px; /* Ajuste a altura do cabeçalho do card */
           
         }
 

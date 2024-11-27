@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servico;
+use App\Models\Pagamento;
 use Illuminate\Http\Request;
 
 class ServicoController
@@ -53,6 +54,34 @@ class ServicoController
         $servico = Servico::findOrFail($id);
         
         return view('servicos.show', compact('servico'));
+    }
+    // Método para cancelar um serviço
+    public function cancelar(Request $request)
+    {
+        // Busca o serviço pelo ID
+        $servico = Servico::find($request->id);
+        
+        // Verifica se o serviço existe
+        if (!$servico) {
+            return response()->json(['success' => false, 'message' => 'Serviço não encontrado.']);
+        }
+
+        // Defina a taxa de cancelamento (exemplo: R$ 50,00)
+        $taxaCancelamento = 50.00;
+        
+        // Cria um registro de pagamento com a taxa de cancelamento
+        $pagamento = new Pagamento();
+        $pagamento->servico_id = $servico->id;
+        $pagamento->valor = $taxaCancelamento;
+        $pagamento->status = 'cancelado';  // Status de cancelamento
+        $pagamento->save();
+
+        // Marca o serviço como cancelado
+        $servico->status = 'cancelado';
+        $servico->save();
+
+        // Retorna resposta em JSON
+        return response()->json(['success' => true, 'message' => 'Serviço cancelado com sucesso. A taxa de cancelamento foi cobrada.']);
     }
 
     /**

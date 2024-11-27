@@ -1,37 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Índice de Serviços</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<!-- resources/views/servicos/index.blade.php -->
+@extends('layouts.app')
 
-<div class="container">
-    <h1 class="text-center">Índice de Serviços</h1>
-
-    <!-- Listagem de Serviços -->
-    <div class="list-group">
-        @foreach($servicos as $servico)
-            <a href="{{ route('servicos.show', $servico->id) }}" class="list-group-item list-group-item-action">
-                <strong>{{ $servico->nome }}</strong> - R$ {{ number_format($servico->valor, 2, ',', '.') }} <br>
-                <small>{{ $servico->descricao }}</small>
-            </a>
-        @endforeach
+@section('content')
+    <div class="container">
+        <h1>Serviços Disponíveis</h1>
+        <div class="row">
+            @foreach($servicos as $servico)
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ asset('storage/'.$servico->foto) }}" class="card-img-top" alt="{{ $servico->tipo_servico }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $servico->tipo_servico }}</h5>
+                            <p><strong>Descrição:</strong> {{ $servico->descricao }}</p>
+                            <p><strong>Preço:</strong> R$ {{ number_format($servico->preco, 2, ',', '.') }}</p>
+                            <!-- Botão para Cancelar Serviço -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelamentoModal" data-id="{{ $servico->id }}">
+                                Cancelar Serviço
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
-
-    <!-- Paginação -->
-    <div class="pagination justify-content-center">
-        {{ $servicos->links() }} <!-- Se você usar paginate() no controlador -->
-    </div>
-</div>
-<a href="{{ route('servicos.index') }}" class="btn btn-secondary btn-back">Voltar para a lista</a>
-
-
-
-<!-- Scripts Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+@endsection
 

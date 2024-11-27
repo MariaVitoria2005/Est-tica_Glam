@@ -32,11 +32,7 @@
             z-index: 1000;
         }
 
-        /* Estilo do título dentro do cabeçalho */
-        header h1 {
-            margin: 0;
-            font-size: 30px;
-        }
+        
 
         /* Para dar um pouco de espaçamento entre o conteúdo do formulário e o cabeçalho fixo */
         .form-container {
@@ -131,15 +127,6 @@
             }
         }
 
-        .cabecalho {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .boasvindas {
-            flex-grow: 1;
-            text-align: center;
-        }
 
         /* Estilo da imagem do serviço */
         .servico-imagem {
@@ -162,15 +149,6 @@
 </head>
 
 <body>
-
-    <header>
-        <div class="cabecalho">
-            <div class="boasvindas">
-                <h1>Bem-vindo à Estética Glam!</h1>
-                <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
-            </div>
-        </div>
-    </header>
 
     <!-- Container do Formulário -->
     <div class="form-container">
@@ -206,6 +184,7 @@
                 <div class="mb-3">
                     <label for="hora" class="form-label"><i class="fas fa-clock"></i> Horário</label>
                     <input type="time" class="form-control" id="hora" name="hora" required>
+                    <input type="hidden" name="" value="{{ $servico_id}}">
                 </div>
 
 

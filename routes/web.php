@@ -16,7 +16,7 @@ Route::get('/dashboard', function () {
 
 // Route::get('/historico', [AgendamentoController::class, 'index'])->name('historico');
 Route::get('/', [AgendamentoController::class, 'index'])->name('Home.index');
-Route::get('/agendamento/create', [AgendamentoController::class, 'create'])->name('agendamento.create');
+Route::get('/agendamento/{create}', [AgendamentoController::class, 'create'])->name('agendamento.create');
 Route::post('/agendamento', [AgendamentoController::class, 'store'])->name('agendamento.store');
 
 Route::get('/feedbacks/create', [FeedbackController::class, 'create'])->name('feedback.create');
@@ -25,12 +25,11 @@ Route::post('/feedbacks', [FeedbackController::class, 'store'])->name('feedback.
 Route::get('/profissionais/create', [ProfissionalController::class, 'create'])->name('profissionais.create');
 Route::post('/profissionais', [ProfissionalController::class, 'store'])->name('profissionais.store');
 
-// routes/web.php
-
 Route::get('/servicos', [ServicoController::class, 'index'])->name('servicos.index');
 Route::get('/servicos/create', [ServicoController::class, 'create'])->name('servicos.create');
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
+Route::post('/cancelar-servico', [ServicoController::class, 'cancelar'])->name('cancelar_servico');
 
 
 
@@ -39,6 +38,12 @@ Route::get('/servico/{id}', [Servico_DetalhesController::class, 'detalhes'])->na
 
 Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagamentos_index');
 Route::get('/pagamentos/{id}', [PagamentoController::class, 'show'])->name('pagamentos.show');
+Route::post('/pagamento', [PagamentoController::class, 'store'])->name('pagamento.store');
+Route::get('/pagamento', [PagamentoController::class, 'showForm'])->name('pagamento.form');
+
+
+// Defina a rota para a página exclusiva do profissional
+Route::get('/exclusivo-profissional', [ProfissionalController::class, 'exclusivo'])->name('exclusivo_profissional')->middleware('auth', 'profissional');
 
 
 Route::middleware('auth')->group(function () {

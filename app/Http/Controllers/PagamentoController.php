@@ -16,6 +16,7 @@ class PagamentoController
     
     public function index(Request $request)
     {
+        $pagamentos = Pagamento::all();
         $servicos = Servico::all();
         $clientes = Cliente::all();
         $agendamentos = Agendamento::all();
@@ -34,9 +35,15 @@ class PagamentoController
         }
 
         // Retorna a view com os pagamentos e o filtro aplicado
-        return view('pagamentos.index', compact('pagamentos', 'status',  'clientes', 'agendamentos', 'servicos'));
+        return view('pagamentos.index', compact('pagamentos' , 'status' ,  'clientes', 'agendamentos', 'servicos'));
 
 
+    }
+    public function showForm()
+    {
+        // Recupera todos os serviços disponíveis para exibir no formulário
+        $servicos = Servico::all();
+        return view('pagamento.form', compact('servicos'));
     }
 
     /**
@@ -54,16 +61,34 @@ class PagamentoController
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'metodo_pagamento' => 'required|string',
+        // $validated = $request->validate([
+        //     'metodo_pagamento' => 'required|string',
+        // ]);
+    
+        // $pagamento = new Pagamento();
+        // $pagamento->metodo_pagamento = $request->metodo_pagamento;
+        // 
+        // $pagamento->save();
+    
+        // return redirect()->route('pagamentos_index')->with('success', 'Pagamento confirmado!');
+
+         // Valida os dados do formulário
+         $validated = $request->validate([
+            'servico_id' => 'required|exists:servicos,id',
+            'metodo_pagamento' => 'required',
+            'nome' => 'required|string|max:255',
         ]);
-    
+
+        // Cria um novo pagamento
         $pagamento = new Pagamento();
+        $pagamento->servico_id = $request->servico_id;
         $pagamento->metodo_pagamento = $request->metodo_pagamento;
-        // Adicionar outros campos conforme necessário
+        $pagamento->cliente_nome = $request->nome;
+        $pagamento->status = 'pago';  // Pode ser 'pago', 'pendente', 'falhou', etc.
         $pagamento->save();
-    
-        return redirect()->route('pagamentos_index')->with('success', 'Pagamento confirmado!');
+
+        // Redireciona o usuário com uma mensagem de sucesso
+        return redirect()->route('pagamento.form')->with('success', 'Pagamento realizado com sucesso!');
         
     }
 
