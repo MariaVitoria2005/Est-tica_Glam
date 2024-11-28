@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AgendamentoController;
 use App\Http\Controllers\ServicoController;
 use App\Http\Controllers\FeedbackController;
@@ -16,9 +17,10 @@ Route::get('/dashboard', function () {
 
 // Route::get('/historico', [AgendamentoController::class, 'index'])->name('historico');
 Route::get('/', [AgendamentoController::class, 'index'])->name('Home.index');
-Route::get('/agendamento/{create}', [AgendamentoController::class, 'create'])->name('agendamento.create');
+Route::get('/agendamento/{id}', [AgendamentoController::class, 'create'])->name('agendamento.create');
 Route::post('/agendamento', [AgendamentoController::class, 'store'])->name('agendamento.store');
 
+Route::get('/feedbacks', [FeedbackController::class, 'index'])->name('feedbacks.index');
 Route::get('/feedbacks/create', [FeedbackController::class, 'create'])->name('feedback.create');
 Route::post('/feedbacks', [FeedbackController::class, 'store'])->name('feedback.store');
 
@@ -40,6 +42,16 @@ Route::get('/pagamentos', [PagamentoController::class, 'index'])->name('pagament
 Route::get('/pagamentos/{id}', [PagamentoController::class, 'show'])->name('pagamentos.show');
 Route::post('/pagamento', [PagamentoController::class, 'store'])->name('pagamento.store');
 Route::get('/pagamento', [PagamentoController::class, 'showForm'])->name('pagamento.form');
+
+
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register'); // Formulário de registro
+Route::post('/register', [AuthController::class, 'store'])->name('register.store'); // Processa o registro
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login'); // Formulário de login
+Route::post('/login', [AuthController::class, 'login'])->name('login.store'); // Processa o login
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Rota para logout
 
 
 // Defina a rota para a página exclusiva do profissional

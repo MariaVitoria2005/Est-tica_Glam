@@ -77,27 +77,21 @@
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
                         <!-- A imagem será centralizada e cobrindo toda a área do card -->
-                        <div class="card-header text-center">
-                            <h5>{{ $servicoRelacionado->nome }}</h5> <!-- Nome centralizado -->
-                        </div>
+                        
                         
                         <div class="card-body">
                             <!-- Imagem do serviço -->
                             <img src="{{ asset('storage/' . $servicoRelacionado->foto) }}" class="card-img-top" alt="{{ $servicoRelacionado->nome }}">
-                            
+                            <div class="card-header text-center">
+                            <h5>{{ $servicoRelacionado->nome }}</h5> <!-- Nome centralizado -->
+                        </div>
                             <!-- Descrição e valor -->
                             <p><strong>Descrição:</strong> {{ Str::limit($servicoRelacionado->descricao, 100) }}</p>
                             <p><strong>Valor:</strong> R$ {{ number_format($servicoRelacionado->valor, 2, ',', '.') }}</p>
 
                             <!-- Botão para agendar -->
                             <div class="d-flex justify-content-between align-items-center">
-                               
-
-                                <!-- Ver detalhes (abre modal) -->
-                                <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalDetalhes{{ $servicoRelacionado->id }}">
-                                    Ver Detalhes
-                                </button>
-                                <a href="{{ route('novo_agendamento') }}" class="btn btn-outline-primary">
+                                <a href="{{ route('agendamento.create',$servico->tipo_servico) }}" class="btn btn-outline-primary">
                                     <i class="fas fa-calendar-check"></i> Agendar
                                 </a>
                             </div>

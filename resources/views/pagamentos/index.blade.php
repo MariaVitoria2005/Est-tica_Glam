@@ -8,73 +8,152 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-      /* Estilos personalizados para o formulário de pagamento */
-      #pagamento-form {
-          max-width: 500px;
-          margin: 0 auto; /* Centraliza o formulário */
-          padding: 20px;
-          background-color: #f8f9fa; /* Fundo claro */
-          border-radius: 10px; /* Bordas arredondadas */
-          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-      }
+        /* Estilo geral do corpo */
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f4f6f9; /* Fundo suave */
+            color: #333;
+            line-height: 1.6;
+        }
 
-      /* Título do formulário */
-      #pagamento-form h1 {
-          font-size: 2rem;
-          color: #343a40;
-      }
+        /* Estilo para o card de pagamento */
+        #pagamento-form {
+            border-radius: 15px; /* Bordas arredondadas para o card */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
+            background-color: #ffffff; /* Fundo branco para destacar o card */
+            padding: 30px;
+        }
 
-      /* Estilizando os campos de input */
-      #pagamento-form input, #pagamento-form select {
-          border-radius: 8px;
-          border: 1px solid #ced4da;
-          padding: 10px;
-          font-size: 1rem;
-      }
+        #pagamento-form .card-header {
+            background-color: #8e24aa; /* Cor de fundo elegante para o cabeçalho */
+            color: #fff;
+            font-size: 2rem;
+            font-weight: bold;
+            border-radius: 15px 15px 0 0;
+            padding: 20px;
+        }
 
-      /* Estilizando os botões */
-      #pagamento-form button {
-          background-color: #007bff;
-          border: none;
-          padding: 12px;
-          font-size: 1.1rem;
-          color: #fff;
-          border-radius: 8px;
-          transition: background-color 0.3s;
-      }
+        #pagamento-form .card-body {
+            padding: 30px 20px;
+        }
 
-      #pagamento-form button:hover {
-          background-color: #0056b3; /* Cor de fundo mais escura no hover */
-      }
+        /* Estilo do título */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            /* Cor chique e elegante */
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-      /* Botão de Voltar */
-      #pagamento-form .btn-secondary {
-          background-color: #6c757d;
-          color: white;
-          font-size: 1rem;
-      }
+        /* Estilo para os labels e campos de entrada */
+        .form-label {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #6a1b9a; /* Cor roxa para o texto do label */
+        }
 
-      #pagamento-form .btn-secondary:hover {
-          background-color: #5a6268;
-      }
-      /* Estilo para o botão Voltar */
-.btn-voltar {
-    background-color: #6c757d; /* Cor de fundo cinza */
-    color: #fff; /* Texto branco */
-    padding: 10px 20px; /* Espaçamento interno */
-    border-radius: 5px; /* Bordas arredondadas */
-    font-size: 1rem; /* Tamanho de fonte */
-    transition: background-color 0.3s, transform 0.2s; /* Efeito de transição */
-}
+        /* Campo de seleção */
+        .form-select {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease-in-out;
+        }
 
-.btn-voltar:hover {
-    background-color: #5a6268; /* Cor de fundo mais escura no hover */
-    transform: scale(1.05); /* Efeito de zoom */
-}
+        .form-select:focus {
+            border-color: #8e24aa; /* Cor ao focar no campo */
+            box-shadow: 0 0 8px rgba(142, 36, 170, 0.4); /* Sombras sutis */
+            outline: none;
+        }
 
-.btn-voltar i {
-    margin-right: 8px; /* Espaço entre o ícone e o texto */
-}
+        /* Campos de texto (input) */
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus {
+            border-color: #8e24aa; /* Cor ao focar no campo */
+            box-shadow: 0 0 8px rgba(142, 36, 170, 0.4);
+            outline: none;
+        }
+
+        /* Botão de Submissão */
+        .btn-primary {
+            background-color: #8e24aa;
+            border: none;
+            color: #fff;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            border-radius: 10px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #6a1b9a; /* Cor mais escura ao passar o mouse */
+            cursor: pointer;
+        }
+
+        /* Botão de voltar */
+        .btn-voltar {
+            background-color: #34495e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            border-radius: 10px;
+            margin-top: 20px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .btn-voltar:hover {
+            background-color: #2c3e50;
+            cursor: pointer;
+        }
+
+        .btn-voltar i {
+            margin-right: 10px; /* Adiciona espaço entre o ícone e o texto */
+        }
+
+        /* Estilo para a seleção de serviço e método de pagamento */
+        .mb-4 {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilo de animação para a transição suave no hover do campo */
+        .form-select, .form-control {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Respostas de foco para melhorar a UX */
+        .form-control:focus, .form-select:focus {
+            border-color: #6a1b9a;
+            box-shadow: 0 0 8px rgba(142, 36, 170, 0.4);
+        }
+
+        /* Adicionando transições e animações nos campos de texto */
+        input, select {
+            transition: border 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Estilo do Card em telas menores */
+        @media (max-width: 768px) {
+            #pagamento-form {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
 
     </style>
 </head>

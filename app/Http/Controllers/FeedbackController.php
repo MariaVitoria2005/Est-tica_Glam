@@ -20,10 +20,16 @@ class FeedbackController
        
         // return view('Home.index',  compact('feedbacks'));
           // Carrega todos os feedbacks, incluindo o relacionamento com o cliente
-          $feedbacks = Feedback::all();  // Aqui estamos carregando todos os feedbacks, incluindo created_at
+        //   $feedbacks = Feedback::all();  // Aqui estamos carregando todos os feedbacks, incluindo created_at
+        
+        $agendamentos = Agendamento::all();
+        $feedbacks = Feedback::all();
+        $servicos = Servico::all();
+        $profissionais = Profissional::all();
 
           // Retorna a view com os dados dos feedbacks
-          return view('feedbacks.index', compact('feedbacks'));
+          return view('Home.index', ['agendamento' => $agendamentos, 'feedbacks'=>$feedbacks,'servicos' => $servicos, 'profissionais' => $profissionais]);
+        //   return view('Home.index', compact('feedbacks'));
        
     }
 

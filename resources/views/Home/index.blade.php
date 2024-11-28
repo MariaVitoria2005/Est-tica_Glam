@@ -8,377 +8,363 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Incluindo o Font Awesome via CDN -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- Incluir no <head> para fontes elegantes -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
+
+<style>
+    /* Estilo geral do corpo */
+    body {
+        font-family: 'Lora', serif;
+        background-color: #f8f9fa;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    /* Estilo do cabeçalho */
+    header.boasvindas {
+        background: linear-gradient(135deg, #6a1b9a, #8e24aa); /* Gradiente chique */
+        color: white;
+        padding: 30px 20px;
+        text-align: center;
+    }
+    header.boasvindas h1 {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    header.boasvindas p {
+        font-size: 1.2rem;
+        margin-top: 10px;
+        font-style: italic;
+    }
+
+    /* Estrelas de avaliação */
+    .stars input[type="radio"]:checked + label {
+        color: #f39c12; /* Cor dourada para estrelas selecionadas */
+    }
+    .stars label {
+        font-size: 1.5rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .stars input[type="radio"] {
+        display: none;
+    }
+
+   /* Estilo para a barra de navegação */
+    nav {
+        display: flex;
+        justify-content: space-between;  /* Garante que o logo e os botões fiquem nos extremos */
+        align-items: center;  /* Alinha o conteúdo verticalmente */
+        padding: 10px 20px;  /* Espaçamento dentro da barra de navegação */
+    }
+
+    /* Estilo para os links */
+    .nav-links {
+        list-style: none;
+        display: flex;
+        justify-content: center;  /* Centraliza os links horizontalmente */
+        gap: 20px;  /* Espaço entre os links */
+        flex-grow: 1;  /* Faz com que os links ocupem o espaço restante */
+    }
+
+    /* Estilo para os links individuais */
+    .nav-links li {
+        display: inline-block;
+    }
+
+    /* Se necessário, alinha os itens da navegação verticalmente */
+    .nav-links a {
+        text-decoration: none;  /* Remove o sublinhado dos links */
+        color: #000;  /* Cor do texto do link */
+        font-size: 16px;  /* Ajuste do tamanho da fonte */
+    }
 
 
-    <style>
-        /* Cabeçalho */
-        header.boasvindas {
-            background: linear-gradient(45deg, #ff6b6b, #f1c40f);
-            color: white;
-            padding: 50px 0;
-            text-align: center;
-            border-bottom: 5px solid #e74c3c;
-        }
-
-        header h1 {
-            font-family: 'Arial', sans-serif;
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-size: 1.25rem;
-            font-style: italic;
-        }
-
-        /* Estrelas de Avaliação */
-        .stars input[type="radio"] {
-            display: none;
-        }
-
-        .stars label {
-            color: #ccc;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        .stars input[type="radio"]:checked ~ label {
-            color: #f39c12;
-        }
-
-        /* Avaliação */
-        .rating-value p {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* Navegação */
-        nav {
-            background-color: #333;
-            padding: 15px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav .logo {
-            display: inline-block;
-            max-height: 50px;
-        }
-
-        nav .nav-links {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: flex-end;
-            gap: 20px;
-        }
-
-        nav .nav-links li {
-            display: inline;
-        }
-
-        nav .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-
-        nav .nav-links a:hover {
-            color: #f39c12;
-        }
-
-        nav .entrar button,
-        nav .entrar a {
-            background-color: #f39c12;
-            color: white;
-            border: none;
-            font-size: 1rem;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-left: 15px;
-            transition: background-color 0.3s ease;
-        }
-
-        nav .entrar button:hover,
-        nav .entrar a:hover {
-            background-color: #e67e22;
-        }
-
-        .hamburger i {
-            color: white;
-            font-size: 2rem;
-        }
-
-
-        /* Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            padding-top: 60px;
-            transition: 0.3s;
-            overflow-x: hidden;
-        }
-
-        .sidebar a {
-            padding: 10px 15px;
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: white;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .sidebar a:hover {
-            background-color: #f39c12;
-        }
-
-        #sidebarToggle {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            font-size: 2rem;
-            color: white;
-            background: none;
-            border: none;
-        }
-
-        @media screen and (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hamburger {
-                display: block;
-            }
-        }
-
-
-        .card {
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-
-        .card img {
-            border-bottom: 2px solid #f1c40f;
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .card-title {
-            font-size: 1.5rem;
-            color: #333;
-        }
-
-        .card p {
-            font-size: 1rem;
-            color: #555;
-        }
-
-        .card .btn {
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .card .btn-outline-primary {
-            border-color: #f39c12;
-            color: #f39c12;
-        }
-
-        .card .btn-outline-primary:hover {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        .card .btn-success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .card .btn-danger {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-
-        footer {
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-            font-size: 0.9rem;
-            text-align: center;
-        }
-
-        footer p {
-            margin: 0;
-        }
-
-        footer a {
-            color: #f39c12;
-            text-decoration: none;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Estilo da Sidebar */
-        .sidebar {
-            position: fixed;
-            left: -250px; /* Inicialmente a sidebar estará fora da tela */
-            top: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            color: white;
-            padding-top: 50px;
-            transition: transform 0.3s ease; /* Transição suave para a abertura */
-            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-        /* Quando a sidebar estiver visível, desloca ela para a tela */
-        .sidebar.open {
-            transform: translateX(250px);
-        }
-
-        /* styles.css */
-
-        /* Estilos gerais da página */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        /* Estilo do botão de abrir a sidebar */
-        .btn-sidebar {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: transparent;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            z-index: 9999;
-        }
-
-        /* Estilos da Sidebar */
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: -250px; /* Escondida inicialmente */
-            width: 250px;
-            height: 100%;
-            background-color: #333;
-            color: white;
-            padding: 30px 20px;
-            transition: 0.3s ease;
-            z-index: 1000;
-        }
-
-        .sidebar.open {
-            left: 0; /* Quando aberta, move para a posição 0 */
-        }
-
-        .sidebar h2 {
-            margin-bottom: 30px;
-        }
-
-        .sidebar a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            margin: 15px 0;
-            font-size: 18px;
-        }
-
-        .sidebar a:hover {
-            background-color: #555;
-            padding-left: 10px;
-            transition: 0.3s;
-        }
-
-        /* Estilos do overlay */
-        .sidebar-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease;
-            z-index: 999;
-        }
-
-        .sidebar-overlay.open {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .logo-container {
-            display: flex;
-            justify-content: flex-start; /* Alinha a logo à esquerda */
-        }
-
-        .logo {
-            margin-left: 100px; /* Ajuste esse valor para controlar a distância */
-            
-        }
-
-
-    </style>
- 
+    /* Estilo do Menu */
+    nav {
+        background-color: #2c3e50; /* Cor escura para o menu */
+        padding: 15px;
+        align-items: center;
+    }
+    .nav-links {
+        list-style: none;
+        display: flex;
     
+        gap: 20px;
+    }
+    .nav-links li a {
+        color: #ecf0f1;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s ease;
+    }
+    .nav-links li a:hover {
+        color: #f39c12;
+    }
+
+    /* Botões (Login e Cadastro) */
+    .btn-outline-primary {
+        border-color: #f39c12;
+        color: #f39c12;
+    }
+    .btn-outline-primary:hover {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .btn-sidebar {
+        font-size: 2rem;
+        background-color: transparent;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .btn-sidebar:hover {
+        color: #f39c12;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: fixed;
+        left: -250px;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background-color: #34495e;
+        color: white;
+        padding-top: 20px;
+        transition: left 0.3s ease;
+        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    .sidebar a {
+        display: block;
+        color: white;
+        padding: 15px;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: background-color 0.3s ease;
+    }
+    .sidebar a:hover {
+        background-color: #8e24aa;
+    }
+
+    /* Cartões de Serviços */
+    .card {
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    .card-body {
+        padding: 30px;
+    }
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    /* Estilo para o rodapé */
+    footer {
+        background-color: #2c3e50;
+        color: white;
+        padding: 30px 0;
+    }
+    footer p {
+        margin: 0;
+        font-size: 1rem;
+    }
+
+    /* Seção de Redes Sociais */
+
+
+    #redes-sociais h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    #redes-sociais p {
+        font-size: 1.2rem;
+        color: #666;
+        margin-bottom: 40px;
+    }
+
+    /* Estilo para os ícones sociais */
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 30px; /* Espaço entre os ícones */
+    }
+
+    .social-icon {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px; /* Alinha o ícone verticalmente */
+        border-radius: 50%; /* Tornar os ícones circulares */
+        font-size: 1.8rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        background-color: #ffffff; /* Cor de fundo do ícone */
+        border: 2px solid #ccc; /* Borda suave */
+        color: #333; /* Cor do ícone */
+    }
+
+    /* Efeitos de hover */
+    .social-icon:hover {
+        background-color: #f39c12; /* Cor dourada no hover */
+        border-color: #f39c12; /* Borda dourada no hover */
+        color: #fff; /* Ícone branco no hover */
+        transform: translateY(-5px); /* Leve movimento para cima */
+    }
+
+    /* Cores de fundo para as redes sociais */
+    .social-icon.facebook {
+        background-color: #3b5998;
+        border-color: #3b5998;
+    }
+
+    .social-icon.instagram {
+        background-color: #e1306c;
+        border-color: #e1306c;
+    }
+
+    .social-icon.twitter {
+        background-color: #1da1f2;
+        border-color: #1da1f2;
+    }
+
+    .social-icon.whatsapp {
+        background-color: #25d366;
+        border-color: #25d366;
+    }
+
+    .social-icon.link {
+        background-color: #ddd;
+        border-color: #ddd;
+    }
+
+    .social-icon.link:hover {
+        background-color: #f39c12; /* Cor dourada no hover */
+        border-color: #f39c12; /* Borda dourada no hover */
+    }
+
+    /* Responsividade para dispositivos móveis */
+    @media (max-width: 768px) {
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            font-size: 1.5rem; /* Reduzir o tamanho dos ícones em telas menores */
+        }
+
+        #redes-sociais h2 {
+            font-size: 1.5rem;
+        }
+
+        #redes-sociais p {
+            font-size: 1rem;
+        }
+    }
+
+
+    /* Formulário de Feedback */
+    #deixar-feedback .form-control {
+        border-radius: 10px;
+        padding: 15px;
+        border: 1px solid #ddd;
+    }
+    #deixar-feedback button {
+        background-color: #f39c12;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        padding: 10px 20px;
+        border: none;
+        transition: background-color 0.3s ease;
+    }
+    #deixar-feedback button:hover {
+        background-color: #e67e22;
+    }
+
+    /* Animações para o Menu */
+    .navbar-toggler {
+        background-color: #f39c12;
+    }
+    .navbar-collapse {
+        justify-content: center;
+    }
+    /* Estilo para o botão de menu */
+    .btn-sidebar {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        font-size: 30px;
+        color: #fff; /* Cor branca para o ícone */
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 1000; /* Para garantir que o botão fique acima do conteúdo */
+    }
+
+    .btn-sidebar i {
+        font-size: 35px; /* Tamanho do ícone */
+    }
+
+    .btn-sidebar:hover {
+        transform: scale(1.1); /* Leve aumento de tamanho no hover */
+        color: #f39c12; /* Cor dourada ao passar o mouse */
+    }
+
+    @media (max-width: 768px) {
+        /* Ajuste para dispositivos móveis */
+        .btn-sidebar {
+            top: 15px;
+            left: 15px;
+        }
+    }
+
+</style>
+
 </head>
     <body>
-        <nav>
-            <div class="logo-container">
-            <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100"> <!-- Substitua com o caminho da sua logo -->
-            </div>
-            
-            <ul class="nav-links">
-                <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
-                <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
-                <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
-                <!-- Link de Navegação para Endereço -->
-                <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
-            </ul>
+    <nav>
+    <div class="logo-container">
+        <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100">
+    </div>
+    
+    <ul class="nav-links">
+        <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
+        <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
+        <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
+        <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
+    </ul>
 
-            <div class="hamburger" id="hamburger-icon">
-                <i class="fas fa-bars"></i> <!-- Ícone de Menu Hambúrguer -->
-            </div>
+    <!-- Alinhamento do conteúdo à direita -->
+    <div class="entrar ms-auto d-flex align-items-center">
+        <!-- Botão Login com ícone -->
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fas fa-user"></i> Login
+        </button>
 
-            <div class="entrar">
-                <div> 
-                    <!-- Botão Login com ícone -->
-                    <!-- Botão Login com cor personalizada (por exemplo, cor verde) -->
-                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                        <i class="fas fa-user"></i> Login  <!-- Ícone de usuário -->
-                    </button>
+        <!-- Link para Cadastro com ícone -->
+        <a href="/register" class="ms-lg-3 btn btn-outline-primary">
+            <i class="fas fa-user-plus"></i> Cadastre-se
+        </a>
+    </div>
+</nav>
 
-
-                    <!-- Link para Cadastro com ícone -->
-                    <a href="/register" class="ms-lg-3 btn btn-outline-primary">
-                        <i class="fas fa-user-plus"></i> Cadastre-se <!-- Ícone de adicionar usuário -->
-                    </a>
-                </div>
-            </div>
-        </nav>
 
         <!-- Novo cabeçalho com título e estrelas abaixo do cabeçalho de navegação -->
         <header class="boasvindas">
@@ -457,44 +443,32 @@
             </script>
 
         <!-- Redes Sociais -->
-        <section id="redes-sociais" class="container mt-4">
-            <div id="redes-sociais" class="row">
-                <!-- Redes Sociais -->
-                <div class="col-md-8 redes-col">
-                    <h2>Nos acompanhe nas redes sociais e fique por dentro das novidades!</h2>
-                    <p>Não perca nossas promoções exclusivas, dicas de beleza e muito mais! Siga-nos nas redes sociais.</p>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                        <a href="https://facebook.com/suaempresa" class="btn btn-link" target="_blank" aria-label="Facebook">
-                            <i class="fab fa-facebook-square text-primary"></i>
+        <section id="redes-sociais" class="container mt-5 py-5">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h2 class="mb-4">Nos acompanhe nas redes sociais e fique por dentro das novidades!</h2>
+                    <p class="lead mb-4">Não perca nossas promoções exclusivas, dicas de beleza e muito mais! Siga-nos nas redes sociais.</p>
+                    <div class="d-flex justify-content-center social-icons">
+                        <a href="https://facebook.com/suaempresa" class="social-icon facebook" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-square"></i>
                         </a>
-
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://www.instagram.com/estetica_glam2025/" class="btn btn-link" target="_blank">
-                                <i class="fab fa-instagram-square text-danger"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://twitter.com/suaempresa" class="btn btn-link" target="_blank">
-                                <i class="fab fa-twitter-square text-info"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://wa.me/+5586988969563" class="btn btn-link" target="_blank">
-                                <i class="fab fa-whatsapp text-success"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <button class="btn btn-link" onclick="copyLink()">
-                                <i class="fas fa-link text-muted"></i>
-                            </button>
-                        </li>
-                    </ul>
+                        <a href="https://www.instagram.com/estetica_glam2025/" class="social-icon instagram" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram-square"></i>
+                        </a>
+                        <a href="https://twitter.com/suaempresa" class="social-icon twitter" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter-square"></i>
+                        </a>
+                        <a href="https://wa.me/+5586988969563" class="social-icon whatsapp" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <button class="social-icon link" onclick="copyLink()" aria-label="Copiar Link">
+                            <i class="fas fa-link"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
-           
+
         <script>
             function copyLink() {
                 navigator.clipboard.writeText(window.location.href).then(function() {
@@ -504,13 +478,21 @@
         </script>
 
         <!-- Exibir foto do usuário logado -->
-        @if (Auth::check())
+         <!-- @if (Auth::check())
             <section id="usuario-logado" class="text-center mt-5">
                 <h3>Bem-vinda, {{ Auth::user()->name }}!</h3>
-                <img src="{{ Auth::user()->profile_photo_url }}" alt="Foto de perfil" class="rounded-circle" width="150">
+                <img src="{{ Auth::user()->foto}}" alt="Foto de perfil" class="rounded-circle" width="150">
             </section>
-            
-        @endif
+        @endif -->
+
+         <!-- Verificar se o usuário está logado -->
+         @auth
+            <!-- Exibir a foto do usuário, se logado -->
+            <div class="text-center mb-3">
+                <img src="{{ asset('storage/' . Auth::user()->foto) }}" alt="Foto do Usuário" class="rounded-circle" width="100" height="100">
+            </div>
+            <p class="text-center">Bem-vindo de volta, {{ Auth::user()->name }}!</p>
+        @endauth
         
         <!-- Serviços Disponíveis -->
       <!-- Serviços Disponíveis -->
@@ -529,7 +511,7 @@
                                 <p><strong>Preço:</strong> R$ {{ number_format($servico->preco, 2, ',', '.') }}</p>
 
                                 <!-- Botões de ação -->
-                                <a href="{{ route('Home.index') }}" class="btn btn-outline-primary">
+                                <a href="{{ route('agendamento.create',$servico->tipo_servico) }}" class="btn btn-outline-primary">
                                     <i class="fas fa-calendar-check"></i> Agendar
                                 </a>
                                 <a href="{{ route('detalhes_servico', $servico->id) }}" class="btn btn-success">
@@ -610,7 +592,7 @@
 
             <!-- Botão para adicionar feedback -->
             <div class="text-center mt-4">
-                <a href="{{ route('feedback.create') }}" class="btn btn-primary">Deixe seu feedback</a>
+                <a href="{{ route('feedbacks.index') }}" class="btn btn-primary">Deixe seu feedback</a>
             </div>
         </section>
 
@@ -738,37 +720,39 @@
 
         <!-- Modal de Login (apenas visível se o usuário não estiver logado) -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-                    <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                        <input type="nome" class="form-control" id="nome" name="nome" required>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
                     </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                    <div class="modal-body">
+                       
+                            <!-- Caso não esteja logado, exibe o formulário de login -->
+                            <form method="POST" action="{{ route('login') }}">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="nome" class="form-label">Nome</label>
+                                    <input type="text" class="form-control" id="nome" name="nome" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">E-mail</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Senha</label>
+                                    <input type="password" class="form-control" id="password" name="password" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Entrar</button>
+                            </form>
+                        
                     </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Entrar</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
