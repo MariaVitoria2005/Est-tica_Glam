@@ -76,15 +76,14 @@
             @foreach ($servicosRelacionados as $servicoRelacionado)
                 <div class="col-md-4 mb-4">
                     <div class="card shadow-sm">
+                    <div class="card-header text-center">
+                                <h5>{{ $servicoRelacionado->nome }}</h5> <!-- Nome centralizado -->
+                            </div>
                         <!-- A imagem será centralizada e cobrindo toda a área do card -->
-                        
-                        
                         <div class="card-body">
                             <!-- Imagem do serviço -->
                             <img src="{{ asset('storage/' . $servicoRelacionado->foto) }}" class="card-img-top" alt="{{ $servicoRelacionado->nome }}">
-                            <div class="card-header text-center">
-                            <h5>{{ $servicoRelacionado->nome }}</h5> <!-- Nome centralizado -->
-                        </div>
+                           
                             <!-- Descrição e valor -->
                             <p><strong>Descrição:</strong> {{ Str::limit($servicoRelacionado->descricao, 100) }}</p>
                             <p><strong>Valor:</strong> R$ {{ number_format($servicoRelacionado->valor, 2, ',', '.') }}</p>

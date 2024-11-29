@@ -31,7 +31,11 @@ Route::get('/servicos', [ServicoController::class, 'index'])->name('servicos.ind
 Route::get('/servicos/create', [ServicoController::class, 'create'])->name('servicos.create');
 Route::post('/servicos', [ServicoController::class, 'store'])->name('servicos.store');
 Route::get('/servicos/{id}', [ServicoController::class, 'show'])->name('servicos.show');
-Route::post('/cancelar-servico', [ServicoController::class, 'cancelar'])->name('cancelar_servico');
+Route::get('/pesquisar-servicos', [ServicoController::class, 'search'])->name('servicos.search');
+// Route::post('/cancelar-servico', [ServicoController::class, 'cancelar'])->name('cancelar_servico');
+// routes/web.php
+Route::delete('/cancelar-servico/{id}', [ServicoController::class, 'cancelar'])->name('servico.cancelar');
+
 
 
 

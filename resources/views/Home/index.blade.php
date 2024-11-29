@@ -78,7 +78,7 @@
     .nav-links a {
         text-decoration: none;  /* Remove o sublinhado dos links */
         color: #000;  /* Cor do texto do link */
-        font-size: 16px;  /* Ajuste do tamanho da fonte */
+        font-size: 20px;  /* Ajuste do tamanho da fonte */
     }
 
 
@@ -211,7 +211,7 @@
         width: 50px;
         height: 50px;
         line-height: 50px; /* Alinha o ícone verticalmente */
-        border-radius: 50%; /* Tornar os ícones circulares */
+        border-radius: 20%; /* Tornar os ícones circulares */
         font-size: 1.8rem;
         text-align: center;
         transition: all 0.3s ease;
@@ -334,45 +334,59 @@
             left: 15px;
         }
     }
+   /* CSS */
+    .logo-container {
+        position: relative;
+    }
+
+    .logo {
+        margin-left: 100px;  /* Empurra a logo para a direita */
+        display: block;  /* Garante que a imagem seja exibida como um bloco */
+        width: 100px;  /* Tamanho da logo */
+    }
+
+
 
 </style>
 
 </head>
     <body>
     <nav>
-    <div class="logo-container">
-        <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100">
-    </div>
-    
-    <ul class="nav-links">
-        <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
-        <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
-        <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
-        <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
-    </ul>
+        <!-- HTML -->
+        <!-- HTML -->
+        <div class="logo-container">
+            <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100">
+        </div>
 
-    <!-- Alinhamento do conteúdo à direita -->
-    <div class="entrar ms-auto d-flex align-items-center">
-        <!-- Botão Login com ícone -->
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-            <i class="fas fa-user"></i> Login
-        </button>
 
-        <!-- Link para Cadastro com ícone -->
-        <a href="/register" class="ms-lg-3 btn btn-outline-primary">
-            <i class="fas fa-user-plus"></i> Cadastre-se
-        </a>
-    </div>
-</nav>
+        
+        <ul class="nav-links">
+            <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
+            <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
+            <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
+            <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
+        </ul>
+
+        <!-- Alinhamento do conteúdo à direita -->
+        <div class="entrar ms-auto d-flex align-items-center">
+            <!-- Botão Login com ícone -->
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+                <i class="fas fa-user"></i> Login
+            </button>
+
+            <!-- Link para Cadastro com ícone -->
+            <a href="/register" class="ms-lg-3 btn btn-outline-primary">
+                <i class="fas fa-user-plus"></i> Cadastre-se
+            </a>
+        </div>
+    </nav>
 
 
         <!-- Novo cabeçalho com título e estrelas abaixo do cabeçalho de navegação -->
         <header class="boasvindas">
             <h1>Bem-vindo à Estética Glam!</h1>
             <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
-
-            <!-- Estrelas de avaliação -->
-            <div class="stars">
+            <!-- <div class="stars">
                 <input type="radio" name="rating" id="star1"><label for="star1" class="fa fa-star"></label>
                 <input type="radio" name="rating" id="star2"><label for="star2" class="fa fa-star"></label>
                 <input type="radio" name="rating" id="star3"><label for="star3" class="fa fa-star"></label>
@@ -380,7 +394,6 @@
                 <input type="radio" name="rating" id="star5"><label for="star5" class="fa fa-star"></label>
             </div>
 
-            <!-- Exibição da avaliação -->
             <div class="rating-value">
                 <p>Avaliação: <span id="rating-num">0</span> estrelas</p>
             </div>
@@ -393,13 +406,12 @@
                         ratingValue.textContent = star.id.replace('star', '');
                     });
                 });
-            </script>
+            </script> -->
 
-
-                    <!-- <div class="search-bar">
-                        <input type="text" placeholder="Pesquise por serviços...">
-                        <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
-                    </div> -->
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquise por serviços...">
+                <button class="btn btn-outline-secondary"><i class="fas fa-search"></i></button>
+            </div> 
         </header> 
 
        
@@ -494,56 +506,100 @@
             <p class="text-center">Bem-vindo de volta, {{ Auth::user()->name }}!</p>
         @endauth
         
-        <!-- Serviços Disponíveis -->
-      <!-- Serviços Disponíveis -->
+       <!-- Modal de Cancelamento -->
+        <div class="modal fade" id="cancelamentoModal" tabindex="-1" aria-labelledby="cancelamentoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cancelamentoModalLabel">Cancelar Serviço</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Você tem certeza que deseja cancelar este serviço? Uma taxa de cancelamento de R$ 10,00 será cobrada.</p>
+                        <button type="button" class="btn btn-danger" id="confirmarCancelamento">Confirmar Cancelamento</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cartões de Serviços -->
         <section id="servicos" class="container mt-5">
             <h2>Serviços Disponíveis</h2>
             <div class="row">
                 @foreach($servicos as $servico)
-                    <!-- Cartão do serviço -->
-                    <div class="col-md-4 mb-4"> <!-- Coluna para 3 itens por linha em telas grandes -->
-                        <div class="card">
-                            <!-- Exibe a imagem do serviço -->
-                            <img src="{{ asset('storage/'.$servico->foto) }}" class="card-img-top" alt="{{ $servico->tipo_servico }}">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $servico->tipo_servico }}</h5>
-                                <p><strong>Descrição:</strong> {{ $servico->descricao }}</p>
-                                <p><strong>Preço:</strong> R$ {{ number_format($servico->preco, 2, ',', '.') }}</p>
+                <!-- Cartão do serviço -->
+                <div class="col-md-4 mb-4"> <!-- Coluna para 3 itens por linha -->
+                    <div class="card">
+                        <img src="{{ asset('storage/'.$servico->foto) }}" class="card-img-top" alt="{{ $servico->tipo_servico }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $servico->tipo_servico }}</h5>
+                            <p><strong>Descrição:</strong> {{ $servico->descricao }}</p>
+                            <p><strong>Preço:</strong> R$ {{ number_format($servico->preco, 2, ',', '.') }}</p>
 
-                                <!-- Botões de ação -->
-                                <a href="{{ route('agendamento.create',$servico->tipo_servico) }}" class="btn btn-outline-primary">
-                                    <i class="fas fa-calendar-check"></i> Agendar
-                                </a>
-                                <a href="{{ route('detalhes_servico', $servico->id) }}" class="btn btn-success">
-                                    <i class="fas fa-info-circle"></i> Detalhes
-                                </a>
-                                <!-- Botão para Cancelar Serviço com ícone -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelamentoModal" data-id="{{ $servico->id }}">
-                                    <i class="fas fa-trash-alt"></i> Cancelar
-                                </button>
-
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-              <!-- Modal de Cancelamento -->
-              <div class="modal fade" id="cancelamentoModal" tabindex="-1" aria-labelledby="cancelamentoModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="cancelamentoModalLabel">Cancelar Serviço</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Você tem certeza que deseja cancelar este serviço? Uma taxa de cancelamento de R$ 10,00 será cobrada.</p>
-                                <button type="button" class="btn btn-danger" id="confirmarCancelamento">Confirmar Cancelamento</button>
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            </div>
+                            <!-- Botões de ação -->
+                            <a href="{{ route('agendamento.create', $servico->tipo_servico) }}" class="btn btn-outline-primary">
+                                <i class="fas fa-calendar-check"></i> Agendar
+                            </a>
+                            <a href="{{ route('detalhes_servico', $servico->id) }}" class="btn btn-success">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </a>
+                            
+                            <!-- Botão para Cancelar Serviço -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelamentoModal" data-id="{{ $servico->id }}">
+                                <i class="fas fa-trash-alt"></i> Cancelar
+                            </button>
                         </div>
                     </div>
                 </div>
+                @endforeach
+            </div>
         </section>
+
+        <!-- Script JavaScript -->
+        <script>
+            let servicoId = null;
+
+            // Quando o botão de cancelamento for clicado, armazene o ID do serviço
+            document.querySelectorAll('.btn-danger[data-bs-toggle="modal"]').forEach(button => {
+                button.addEventListener('click', function () {
+                    servicoId = this.getAttribute('data-id');
+                });
+            });
+
+            // Quando o botão de confirmar cancelamento for clicado
+            document.getElementById('confirmarCancelamento').addEventListener('click', function () {
+                if (servicoId) {
+                    // Enviar requisição AJAX para cancelar o serviço
+                    fetch(`/cancelar-servico/${servicoId}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token para segurança
+                        },
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Serviço cancelado com sucesso!');
+                            // Fechar o modal
+                            const modal = new bootstrap.Modal(document.getElementById('cancelamentoModal'));
+                            modal.hide();
+                            // Recarregar a página ou atualizar a lista de serviços
+                            window.location.reload();
+                        } else {
+                            alert('Erro ao cancelar o serviço.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao cancelar o serviço:', error);
+                        alert('Erro ao realizar o cancelamento.');
+                    });
+                }
+            });
+        </script>
+
+
 
         <!-- Feedbacks de Clientes -->
         <section id="feedbacks" class="container mt-5">
@@ -596,81 +652,6 @@
             </div>
         </section>
 
-
-       <!-- Formulário de Feedback -->
-        <section id="deixar-feedback" class="container mt-5">
-            <h2>Deixe sua opinião</h2>
-            <form action="{{ route('feedback.store') }}" method="POST">
-                @csrf
-
-                <!-- Nome do Cliente (opcional) -->
-                <div class="mb-3">
-                    <label for="nome" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome" required>
-                </div>
-
-                <!-- E-mail (opcional) -->
-                <div class="mb-3">
-                    <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Seu e-mail" required>
-                </div>
-
-                <!-- Comentário -->
-                <div class="mb-3">
-                    <label for="comentario" class="form-label">Comentário</label>
-                    <textarea class="form-control" id="comentario" name="comentario" rows="3" placeholder="Deixe seu comentário sobre o serviço" required></textarea>
-                </div>
-
-                <!-- Avaliação com Estrelas -->
-                <div class="mb-3">
-                    <label for="avaliacao" class="form-label">Avaliação</label>
-                    <div id="rating-stars" class="d-flex">
-                        <span class="star" data-value="1">&#9733;</span>
-                        <span class="star" data-value="2">&#9733;</span>
-                        <span class="star" data-value="3">&#9733;</span>
-                        <span class="star" data-value="4">&#9733;</span>
-                        <span class="star" data-value="5">&#9733;</span>
-                    </div>
-                    <input type="hidden" id="avaliacao" name="avaliacao" value="" required>
-                </div>
-
-                <!-- Botão de Envio -->
-                <button type="submit" class="btn btn-primary">Enviar Feedback</button>
-            </form>
-        </section>
-
-        <!-- Estilos para as Estrelas -->
-        <style>
-            #rating-stars .star {
-                font-size: 2rem;
-                cursor: pointer;
-                color: #ccc;
-            }
-            #rating-stars .star.selected {
-                color: #f39c12;
-            }
-        </style>
-
-        <!-- Script para manipulação das Estrelas -->
-        <script>
-            // Adiciona funcionalidade para as estrelas
-            const stars = document.querySelectorAll('#rating-stars .star');
-            stars.forEach(star => {
-                star.addEventListener('click', function() {
-                    // Define a avaliação de acordo com a estrela clicada
-                    const rating = this.getAttribute('data-value');
-                    document.getElementById('avaliacao').value = rating;
-
-                    // Atualiza as estrelas para mostrar a seleção
-                    stars.forEach(star => star.classList.remove('selected'));
-                    for (let i = 0; i < rating; i++) {
-                        stars[i].classList.add('selected');
-                    }
-                });
-            });
-        </script>
-
-
         <!-- Seção Sobre Nós / Endereço -->
         <section id="sobre-nos" class="container mt-5 py-5">
             <div class="row">
@@ -683,40 +664,7 @@
             </div>
         </section>
 
-        <section id="sobre-nos" class="container mt-4 py-4" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-            <div class="row">
-            <div class="col-12 text-center mb-3">
-                <h3 class="display-5" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Sobre a Estética Glam</h3>
-                <p class="lead text-muted" style="font-size: 1rem; line-height: 1.4;">A Estética Glam é uma clínica especializada em oferecer tratamentos de beleza de alta qualidade. Nossa missão é proporcionar uma experiência única para nossos clientes, aliando bem-estar e resultados excepcionais.</p>
-            </div>
-
-            <!-- Missão -->
-            <div class="col-md-4 text-center mb-3">
-                <div class="icon mb-2">
-                    <i class="fas fa-cogs fa-3x" style="color: #007bff;"></i>
-                </div>
-                <h4 style="font-size: 1.25rem; font-weight: 600;">Missão</h4>
-                <p style="font-size: 0.9rem;">Oferecer tratamentos estéticos inovadores e personalizados para cada cliente, visando resultados excepcionais.</p>
-            </div>
-
-            <!-- Visão -->
-            <div class="col-md-4 text-center mb-3">
-                <div class="icon mb-2">
-                    <i class="fas fa-bullseye fa-3x" style="color: #28a745;"></i>
-                </div>
-                <h4 style="font-size: 1.25rem; font-weight: 600;">Visão</h4>
-                <p style="font-size: 0.9rem;">Ser a clínica de estética mais renomada e confiável da região, sendo referência em qualidade e resultados.</p>
-            </div>
-
-            <!-- Valores -->
-            <div class="col-md-4 text-center mb-3">
-                <div class="icon mb-2">
-                    <i class="fas fa-handshake fa-3x" style="color: #ffc107;"></i>
-                </div>
-                <h4 style="font-size: 1.25rem; font-weight: 600;">Valores</h4>
-                <p style="font-size: 0.9rem;">Comprometimento, excelência, confiança e respeito, buscando sempre a satisfação total de nossos clientes.</p>
-            </div>  
-        </section>
+ 
 
         <!-- Modal de Login (apenas visível se o usuário não estiver logado) -->
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -778,6 +726,40 @@
                 document.body.classList.toggle('alto-contraste');
             });
         </script>
+        <section id="sobre-nos" class="container mt-4 py-4" style="background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
+            <div class="row">
+            <div class="col-12 text-center mb-3">
+                <h3 class="display-5" style="font-family: 'Arial', sans-serif; color: #333; font-weight: bold;">Sobre a Estética Glam</h3>
+                <p class="lead text-muted" style="font-size: 1rem; line-height: 1.4;">A Estética Glam é uma clínica especializada em oferecer tratamentos de beleza de alta qualidade. Nossa missão é proporcionar uma experiência única para nossos clientes, aliando bem-estar e resultados excepcionais.</p>
+            </div>
+
+            <!-- Missão -->
+            <div class="col-md-4 text-center mb-3">
+                <div class="icon mb-2">
+                    <i class="fas fa-cogs fa-3x" style="color: #007bff;"></i>
+                </div>
+                <h4 style="font-size: 1.25rem; font-weight: 600;">Missão</h4>
+                <p style="font-size: 0.9rem;">Oferecer tratamentos estéticos inovadores e personalizados para cada cliente, visando resultados excepcionais.</p>
+            </div>
+
+            <!-- Visão -->
+            <div class="col-md-4 text-center mb-3">
+                <div class="icon mb-2">
+                    <i class="fas fa-bullseye fa-3x" style="color: #28a745;"></i>
+                </div>
+                <h4 style="font-size: 1.25rem; font-weight: 600;">Visão</h4>
+                <p style="font-size: 0.9rem;">Ser a clínica de estética mais renomada e confiável da região, sendo referência em qualidade e resultados.</p>
+            </div>
+
+            <!-- Valores -->
+            <div class="col-md-4 text-center mb-3">
+                <div class="icon mb-2">
+                    <i class="fas fa-handshake fa-3x" style="color: #ffc107;"></i>
+                </div>
+                <h4 style="font-size: 1.25rem; font-weight: 600;">Valores</h4>
+                <p style="font-size: 0.9rem;">Comprometimento, excelência, confiança e respeito, buscando sempre a satisfação total de nossos clientes.</p>
+            </div>  
+        </section>
        
           <!-- Rodapé -->
         <footer class="bg-dark text-white text-center py-4 mt-5">

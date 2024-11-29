@@ -28,7 +28,7 @@ class FeedbackController
         $profissionais = Profissional::all();
 
           // Retorna a view com os dados dos feedbacks
-          return view('Home.index', ['agendamento' => $agendamentos, 'feedbacks'=>$feedbacks,'servicos' => $servicos, 'profissionais' => $profissionais]);
+          return view('feedbacks.index', ['agendamento' => $agendamentos, 'feedbacks'=>$feedbacks,'servicos' => $servicos, 'profissionais' => $profissionais]);
         //   return view('Home.index', compact('feedbacks'));
        
     }
@@ -55,20 +55,35 @@ class FeedbackController
      */
     public function store(Request $request)
     {
-        $request->validate([
-          'nota' => 'required',
-          'comentario' => 'required',
-          'agendamento_id' => 'required',
-          'data_feedback' => 'required',
-          'cliente_id' => 'required',
-          'profissional_id' => 'required',
-          'servico_id' => 'required',
-        ]);
+        // $request->validate([
+        //   'nota' => 'required',
+        //   'comentario' => 'required',
+        //   'agendamento_id' => 'required',
+        //   'data_feedback' => 'required',
+        //   'cliente_id' => 'required',
+        //   'profissional_id' => 'required',
+        //   'servico_id' => 'required',
+        // ]);
     
-        Feedback::create($request->all());
+        // Feedback::create($request->all());
            
-        return redirect()->route('Home.index');
-    }
+        // return redirect()->route('Home.index');
+
+        // Validar os dados do feedback (opcional)
+        $request->validate([
+            'nome' => 'nullable|string',
+            'email' => 'nullable|email',
+            'comentario' => 'required|string',
+            'avaliacao_service' => 'required|integer|between:1,5',
+            'avaliacao_profissional' => 'required|integer|between:1,5',
+        ]);
+
+        // Criar ou salvar o feedback (ajuste conforme sua lógica)
+        Feedback::create($request->all());
+
+        // Redirecionar para a página principal após o envio do feedback
+        return redirect('/')->with('success', 'Obrigado pelo seu feedback!');
+        }
 
     /**
      * Display the specified resource.

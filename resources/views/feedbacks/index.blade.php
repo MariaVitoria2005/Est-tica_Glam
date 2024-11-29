@@ -5,95 +5,273 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feedbacks - Estética Glam</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CDN do Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            padding: 30px;
-        }
-        .container {
-            max-width: 1200px;
-            margin: auto;
-        }
-        .feedback-card {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            padding: 20px;
-        }
-        .feedback-card h3 {
-            margin-top: 0;
-        }
-        .btn-custom {
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .btn-custom:hover {
-            background-color: #0056b3;
-        }
-    </style>
+    /* Estilos do card */
+    .feedback-card {
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Título do card */
+    .feedback-card h2 {
+        font-family: 'Helvetica', sans-serif;
+        color: #444;
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    /* Estilos para os campos de entrada */
+    .form-control {
+        font-size: 1rem;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .form-control:focus {
+        border-color: #f39c12;
+        box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+        outline: none;
+    }
+
+    /* Estilos das estrelas de avaliação */
+    #rating-stars-service .star, #rating-stars-profissional .star {
+        font-size: 2rem;
+        color: #ddd;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    #rating-stars-service .star.selected, #rating-stars-profissional .star.selected {
+        color: #f39c12;
+    }
+
+    #rating-stars-service .star:hover, #rating-stars-profissional .star:hover {
+        color: #f39c12;
+    }
+
+    /* Estilos para os botões */
+    .btn-primary {
+        background-color: #f39c12;
+        border-color: #e67e22;
+        font-size: 1.2rem;
+        padding: 12px 30px;
+        border-radius: 8px;
+        width: 100%;
+        text-transform: uppercase;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        margin-bottom: 15px; /* Adiciona o espaçamento entre os botões */
+    }
+
+    .btn-primary:hover {
+        background-color: #e67e22;
+        border-color: #d35400;
+        transform: translateY(-2px);
+    }
+
+    .btn-primary:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(243, 156, 18, 0.5);
+    }
+
+    /* Estilo para a legenda de cada campo */
+    .form-label {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    /* Layout do card */
+    .container {
+        max-width: 100%;
+    }
+
+    /* Efeito de hover para as estrelas */
+    #rating-stars-service .star:hover, #rating-stars-profissional .star:hover {
+        transform: scale(1.2);
+    }
+
+    /* Ajuste para o layout das estrelas */
+    .d-flex {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* Distância entre as avaliações */
+    .mb-4 {
+        margin-bottom: 30px;
+    }
+
+    /* Card container */
+    .feedback-card {
+        background-color: #f9f9f9;
+    }
+
+    /* Botão de Voltar */
+    .btn-voltar {
+        background-color: #f39c12; /* Cor de fundo azul */
+        color: #fff; /* Cor do texto (branco) */
+        padding: 12px 30px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        border-radius: 10px; /* Borda arredondada */
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none; /* Remove o sublinhado do link */
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 10px rgba(52, 152, 219, 0.2); /* Sombra suave */
+        margin-top: 10px; /* Espaçamento entre o botão de envio e o de voltar */
+    }
+
+    /* Efeito de Hover */
+    .btn-voltar:hover {
+        transform: translateY(-3px); /* Eleva o botão ao passar o mouse */
+        box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3); /* Sombra mais forte */
+    }
+
+    /* Efeito no ícone */
+    .btn-voltar i {
+        font-size: 1.3rem;
+        margin-right: 10px;
+        transition: transform 0.3s ease; /* Suaviza a rotação do ícone */
+    }
+
+    /* Efeito de hover no ícone */
+    .btn-voltar:hover i {
+        transform: rotate(-180deg); /* Rotaciona o ícone quando o botão é hoverado */
+    }
+
+    /* Ajustes para foco e acessibilidade */
+    .btn-voltar:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+    }
+</style>
+
 </head>
 <body>
-    <div class="feedback-card">
-        <h3>Deixe seu Feedback</h3>
-        <form action="/enviar-feedback" method="POST">
-            <div class="mb-3">
-                <label for="feedback" class="form-label">Seu Comentário</label>
-                <textarea class="form-control" id="feedback" name="feedback" rows="4" required></textarea>
+
+    <!-- Card de Feedback -->
+<section id="deixar-feedback" class="feedback-card">
+
+    <h2>Deixe sua opinião</h2>
+    <form action="{{ route('feedback.store') }}" method="POST" id="feedback-form">
+        @csrf
+
+        <!-- Nome do Cliente -->
+        <div class="mb-3">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome">
+        </div>
+
+        <!-- E-mail -->
+        <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Seu e-mail">
+        </div>
+
+        <!-- Comentário sobre o serviço -->
+        <div class="mb-4">
+            <label for="comentario" class="form-label">Comentário sobre o serviço</label>
+            <textarea class="form-control" id="comentario" name="comentario" rows="4" placeholder="Deixe seu comentário sobre o serviço" required></textarea>
+        </div>
+
+        <!-- Avaliação do serviço -->
+        <div class="mb-4">
+            <label for="avaliacao" class="form-label">Avaliação do serviço</label>
+            <div id="rating-stars-service" class="d-flex">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
             </div>
-            <div class="mb-3">
-                <label for="rating" class="form-label">Avaliação</label>
-                <select class="form-control" id="rating" name="rating" required>
-                    <option value="1">1 - Muito Ruim</option>
-                    <option value="2">2 - Ruim</option>
-                    <option value="3">3 - Regular</option>
-                    <option value="4">4 - Bom</option>
-                    <option value="5">5 - Excelente</option>
-                </select>
+            <input type="hidden" id="avaliacao-service" name="avaliacao_service" value="" required>
+        </div>
+
+        <!-- Comentário sobre o profissional -->
+        <div class="mb-4">
+            <label for="comentario-profissional" class="form-label">Comentário sobre o profissional</label>
+            <textarea class="form-control" id="comentario-profissional" name="comentario_profissional" rows="4" placeholder="Deixe seu comentário sobre o profissional" required></textarea>
+        </div>
+
+        <!-- Avaliação do profissional -->
+        <div class="mb-4">
+            <label for="avaliacao-profissional" class="form-label">Avaliação do profissional</label>
+            <div id="rating-stars-profissional" class="d-flex">
+                <span class="star" data-value="1">&#9733;</span>
+                <span class="star" data-value="2">&#9733;</span>
+                <span class="star" data-value="3">&#9733;</span>
+                <span class="star" data-value="4">&#9733;</span>
+                <span class="star" data-value="5">&#9733;</span>
             </div>
-            <button type="submit" class="btn btn-primary">Enviar Feedback</button>
-        </form>
-    </div>
-
-
-    <div class="container">
-        <h1 class="text-center mb-5">Índice de Feedbacks</h1>
-
-        <!-- Card de Agendamento -->
-        <div class="feedback-card">
-            <h3>1. Agendamento</h3>
-            <p>Avaliações sobre o processo de agendamento. Facilidade, tempo de espera, disponibilidade de horários, etc.</p>
-            <a href="#agendamento" class="btn-custom">Ver Agendamentos</a>
+            <input type="hidden" id="avaliacao-profissional" name="avaliacao_profissional" value="" required>
         </div>
 
-        <!-- Card de Feedbacks -->
-        <div class="feedback-card">
-            <h3>2. Feedbacks</h3>
-            <p>Comentários gerais dos clientes sobre a experiência na Estética Glam, incluindo opinião sobre os serviços e ambiente.</p>
-            <a href="#feedbacks" class="btn-custom">Ver Feedbacks</a>
-        </div>
+        <!-- Botão de Envio -->
+        <button type="submit" class="btn btn-primary">Enviar Feedback</button>
+        
+        <!-- Botão de Voltar -->
+        <a href="/" class="btn-voltar">
+            <i class="fa fa-arrow-left"></i> Voltar à Página Principal
+        </a>
 
-        <!-- Card de Serviço -->
-        <div class="feedback-card">
-            <h3>3. Serviço</h3>
-            <p>Avaliação dos serviços oferecidos: qualidade, eficácia, resultados, atendimento, etc.</p>
-            <a href="#servico" class="btn-custom">Ver Serviços</a>
-        </div>
+    </form>
+</section>
 
-        <!-- Card de Profissional -->
-        <div class="feedback-card">
-            <h3>4. Profissional</h3>
-            <p>Avaliações sobre os profissionais da Estética Glam: cortesia, competência, conhecimento, etc.</p>
-            <a href="#profissional" class="btn-custom">Ver Profissionais</a>
-        </div>
-    </div>
+<!-- Script de Interatividade das Estrelas -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Função para atualizar as estrelas
+        function updateStars(stars, selectedIndex) {
+            stars.forEach((star, index) => {
+                if (index < selectedIndex) {
+                    star.classList.add('selected');
+                } else {
+                    star.classList.remove('selected');
+                }
+            });
+        }
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        // Função para configurar as estrelas
+        function setupRating(starContainerId, inputFieldId) {
+            const stars = document.querySelectorAll(`#${starContainerId} .star`);
+            const hiddenInput = document.getElementById(inputFieldId);
+
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const selectedValue = parseInt(star.getAttribute('data-value'));
+                    updateStars(stars, selectedValue);
+                    hiddenInput.value = selectedValue;
+                });
+
+                star.addEventListener('mouseover', function() {
+                    const hoveredIndex = parseInt(star.getAttribute('data-value'));
+                    updateStars(stars, hoveredIndex);
+                });
+
+                star.addEventListener('mouseleave', function() {
+                    const currentValue = hiddenInput.value ? parseInt(hiddenInput.value) : 0;
+                    updateStars(stars, currentValue);
+                });
+            });
+        }
+
+        setupRating('rating-stars-service', 'avaliacao-service');
+        setupRating('rating-stars-profissional', 'avaliacao-profissional');
+    });
+</script>
+
 </body>
 </html>

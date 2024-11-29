@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Servico;
+
 use App\Models\Pagamento;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,28 @@ class ServicoController
     /**
      * Display a listing of the resource.
      */
+   
     public function index()
     {
         $servicos = Servico::all();
         return view('servicos.index', compact('servicos'));
-       
     }
+
+    // Método para realizar a pesquisa de serviços
+    public function search(Request $request)
+    {
+        // Obtemos o termo de pesquisa do usuário
+        $query = $request->input('query');
+        
+        // Filtramos os serviços com base no termo da pesquisa
+        $servicos = Servico::where('tipo_servico', 'LIKE', "%{$query}%")
+                            ->orWhere('descricao', 'LIKE', "%{$query}%")
+                            ->get();
+
+        // Retorna os serviços encontrados como uma resposta JSON
+        return response()->json($servicos);
+    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -46,6 +63,33 @@ class ServicoController
            return redirect()->route('Home.index');
     }
 
+    public function cancelar(Request $id)
+    {
+         // Encontre o serviço pelo ID
+        $servico = Servico::find($id);
+
+        if (!$servico) {
+            return response()->json(['success' => false, 'message' => 'Serviço não encontrado.'], 404);
+        }
+
+        // Defina a taxa de cancelamento (exemplo: R$ 10,00)
+        $taxaCancelamento = 10.00;
+
+        // Crie um pagamento para registrar a taxa de cancelamento
+        $pagamento = new Pagamento();
+        $pagamento->servico_id = $servico->id;
+        $pagamento->valor = $taxaCancelamento;
+        $pagamento->status = 'cancelado';  // Status de cancelamento
+        $pagamento->save();
+
+        // Marque o serviço como cancelado
+        $servico->status = 'cancelado';
+        $servico->save();
+
+        // Retorne a resposta de sucesso
+        return response()->json(['success' => true, 'message' => 'Serviço cancelado com sucesso. A taxa de cancelamento foi cobrada.']);
+    }
+    
     /**
      * Display the specified resource.
      */
@@ -55,6 +99,7 @@ class ServicoController
         
         return view('servicos.show', compact('servico'));
     }
+
     // Método para cancelar um serviço
     public function cancelar(Request $request)
     {
