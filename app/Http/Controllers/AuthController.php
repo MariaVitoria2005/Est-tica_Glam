@@ -57,7 +57,7 @@ class AuthController extends Controller
          // Tenta autenticar o usuário
          if (Auth::attempt(['email' => $request->email, 'password' => $request->senha])) {
              // Redireciona para a página inicial ou onde você desejar após login bem-sucedido
-             return redirect()->route('home');
+             return redirect()->route('Home.index');
          } else {
              // Caso o login falhe, redireciona de volta com erro
              return back()->withErrors(['email' => 'Credenciais incorretas']);

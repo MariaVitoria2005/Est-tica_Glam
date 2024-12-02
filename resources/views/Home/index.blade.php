@@ -498,6 +498,7 @@
         @endif -->
 
          <!-- Verificar se o usuário está logado -->
+
          @auth
             <!-- Exibir a foto do usuário, se logado -->
             <div class="text-center mb-3">
