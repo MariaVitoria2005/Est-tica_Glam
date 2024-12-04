@@ -190,7 +190,6 @@
                             <option value="">Selecione a Forma de Pagamento</option>
                             <option value="cartao">Cartão de Crédito</option>
                             <option value="cartao">Cartão de Débito</option>
-                            <option value="dinheiro">Dinheiro</option>
                             <option value="pix">Pix</option>
                         </select>
                     </div>

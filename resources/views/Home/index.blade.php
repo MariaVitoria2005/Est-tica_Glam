@@ -386,7 +386,7 @@
         <header class="boasvindas">
             <h1>Bem-vindo à Estética Glam!</h1>
             <p>"Beleza e bem-estar em cada detalhe. Transforme-se na Estética Glam!"</p>
-            <!-- <div class="stars">
+            <div class="stars">
                 <input type="radio" name="rating" id="star1"><label for="star1" class="fa fa-star"></label>
                 <input type="radio" name="rating" id="star2"><label for="star2" class="fa fa-star"></label>
                 <input type="radio" name="rating" id="star3"><label for="star3" class="fa fa-star"></label>
@@ -406,7 +406,7 @@
                         ratingValue.textContent = star.id.replace('star', '');
                     });
                 });
-            </script> -->
+            </script> 
 
             <div class="search-bar">
                 <input type="text" placeholder="Pesquise por serviços...">
@@ -632,15 +632,8 @@
 
                                 <p class="card-text"><strong>Nota:</strong> {{ $feedback->nota }} ★</p>
 
-                                <!-- Data do Feedback -->
-                                <p class="card-text text-muted" style="font-size: 0.9rem;">
-                                    Feedback enviado em: 
-                                    @if($feedback->created_at instanceof \Carbon\Carbon)
-                                        {{ $feedback->created_at->format('d/m/Y') }}
-                                    @else
-                                        Data não disponível
-                                    @endif
-                                </p>
+                            
+                                
                             </div>
                         </div>
                     </div>
