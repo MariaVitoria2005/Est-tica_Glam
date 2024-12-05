@@ -12,147 +12,223 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400&display=swap" rel="stylesheet">
 
 <style>
-    /* Estilo geral do corpo */
-    body {
-        font-family: 'Lora', serif;
+/* Resetando margens e preenchimentos padrão */
+
+/* Estilo para a navbar fixa */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Logo */
+nav .logo-container {
+    display: inline-block;
+}
+
+nav .logo {
+    width: 100px;
+}
+
+/* Links de Navegação */
+.nav-links {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 10px 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.nav-links li {
+    margin: 0 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+/* Botões de Login e Cadastro à direita */
+.entrar {
+    display: flex;
+    align-items: center;
+    margin-left: auto; /* Alinha os botões à direita */
+    padding: 10px 20px;
+}
+
+.entrar .btn, .entrar a {
+    margin-left: 10px;
+}
+
+/* Definindo a posição da body para não sobrepor com a navbar */
+body {
+    padding-top: 80px;
+    font-family: 'Lora', serif;
         background-color: #f8f9fa;
         color: #333;
         line-height: 1.6;
-    }
+}
 
-    /* Estilo do cabeçalho */
-    header.boasvindas {
-        background: linear-gradient(135deg, #6a1b9a, #8e24aa); /* Gradiente chique */
-        color: white;
-        padding: 30px 20px;
-        text-align: center;
-    }
-    header.boasvindas h1 {
-        font-family: 'Playfair Display', serif;
-        font-size: 3rem;
-        font-weight: bold;
-    }
-    header.boasvindas p {
-        font-size: 1.2rem;
+/* Cabeçalho */
+header.boasvindas {
+    text-align: center;
+    padding: 50px 20px;
+    color: white;
+    margin-top: 50px; /* Para não sobrepor com a navbar */
+    background: linear-gradient(135deg, #6a1b9a, #8e24aa); /* Gradiente chique */  
+}
+
+header.boasvindas h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;  
+}
+
+header.boasvindas p {
+    font-size: 1.2rem;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 1.2rem;
         margin-top: 10px;
         font-style: italic;
-    }
 
-    /* Estrelas de avaliação */
-    .stars input[type="radio"]:checked + label {
-        color: #f39c12; /* Cor dourada para estrelas selecionadas */
-    }
-    .stars label {
-        font-size: 1.5rem;
-        color: #ccc;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
-    .stars input[type="radio"] {
-        display: none;
-    }
+}
 
-   /* Estilo para a barra de navegação */
-    nav {
-        display: flex;
-        justify-content: space-between;  /* Garante que o logo e os botões fiquem nos extremos */
-        align-items: center;  /* Alinha o conteúdo verticalmente */
-        padding: 10px 20px;  /* Espaçamento dentro da barra de navegação */
-    }
+.stars {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
 
-    /* Estilo para os links */
-    .nav-links {
-        list-style: none;
-        display: flex;
-        justify-content: center;  /* Centraliza os links horizontalmente */
-        gap: 20px;  /* Espaço entre os links */
-        flex-grow: 1;  /* Faz com que os links ocupem o espaço restante */
-    }
+.stars input {
+    display: none;
+}
 
-    /* Estilo para os links individuais */
-    .nav-links li {
-        display: inline-block;
-    }
+.stars label {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+}
 
-    /* Se necessário, alinha os itens da navegação verticalmente */
-    .nav-links a {
-        text-decoration: none;  /* Remove o sublinhado dos links */
-        color: #000;  /* Cor do texto do link */
-        font-size: 20px;  /* Ajuste do tamanho da fonte */
-    }
+.stars input:checked ~ label {
+    color: #ffd700; /* Cor do star quando selecionado */
+}
+
+.stars label:hover,
+.stars label:hover ~ label {
+    color: #ffd700;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.search-bar input {
+    padding: 10px;
+    width: 60%;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-left: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+/* Sidebar fixa */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px; /* Sidebar começa fora da tela à direita */
+    width: 250px;
+    height: 100%;
+    background-color: #000; /* Cor de fundo da sidebar */
+    color: white;
+    padding-top: 60px;
+    transition: right 0.3s ease; /* Transição suave */
+    z-index: 999;
+}
+
+.sidebar.open {
+    right: 0; /* Quando a sidebar abrir, ela vai para a posição zero, à direita */
+}
+
+.sidebar a {
+    color: #fff;
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.sidebar a:hover {
+    background-color: #444;
+}
+
+/* Overlay para fechar a sidebar */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+    z-index: 998;
+}
+
+.sidebar-overlay.open {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Botão para abrir a sidebar */
+.btn-sidebar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    font-size: 24px;
+    z-index: 1001; /* Acima da sidebar */
+}
+
+.btn-sidebar:focus {
+    outline: none;
+}
 
 
-    /* Estilo do Menu */
-    nav {
-        background-color: #2c3e50; /* Cor escura para o menu */
-        padding: 15px;
-        align-items: center;
-    }
-    .nav-links {
-        list-style: none;
-        display: flex;
-    
-        gap: 20px;
-    }
-    .nav-links li a {
-        color: #ecf0f1;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: color 0.3s ease;
-    }
-    .nav-links li a:hover {
-        color: #f39c12;
-    }
 
-    /* Botões (Login e Cadastro) */
-    .btn-outline-primary {
-        border-color: #f39c12;
-        color: #f39c12;
-    }
-    .btn-outline-primary:hover {
-        background-color: #f39c12;
-        color: white;
-    }
 
-    .btn-sidebar {
-        font-size: 2rem;
-        background-color: transparent;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        transition: color 0.3s ease;
-    }
-    .btn-sidebar:hover {
-        color: #f39c12;
-    }
-
-    /* Sidebar */
-    .sidebar {
-        position: fixed;
-        left: -250px;
-        top: 0;
-        width: 250px;
-        height: 100%;
-        background-color: #34495e;
-        color: white;
-        padding-top: 20px;
-        transition: left 0.3s ease;
-        box-shadow: 3px 0 10px rgba(0, 0, 0, 0.3);
-    }
-    .sidebar.open {
-        left: 0;
-    }
-    .sidebar a {
-        display: block;
-        color: white;
-        padding: 15px;
-        text-decoration: none;
-        font-size: 1.1rem;
-        transition: background-color 0.3s ease;
-    }
-    .sidebar a:hover {
-        background-color: #8e24aa;
-    }
 
     /* Cartões de Serviços */
     .card {
@@ -352,34 +428,33 @@
 </head>
     <body>
     <nav>
-        <!-- HTML -->
-        <!-- HTML -->
-        <div class="logo-container">
-            <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100">
-        </div>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="storage/fotos/logo.png" alt="Logo Estética Glam" class="logo" width="100">
+    </div>
 
+    <!-- Links de Navegação -->
+    <ul class="nav-links">
+        <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
+        <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
+        <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
+        <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
+    </ul>
 
-        
-        <ul class="nav-links">
-            <li><a href="#servicos" class="fas fa-cogs">Serviços</a></li>
-            <li><a href="#feedbacks" class="fas fa-comments">Feedbacks</a></li>
-            <li><a href="#sobre-nos" class="fas fa-info-circle">Sobre Nós</a></li>
-            <li><a href="#sobre-nos" class="fas fa-info-circle">Endereço</a></li>
-        </ul>
+    <!-- Alinhamento do conteúdo à direita -->
+    <div class="entrar ms-auto d-flex align-items-center">
+        <!-- Botão Login com ícone -->
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+            <i class="fas fa-user"></i> Login
+        </button>
 
-        <!-- Alinhamento do conteúdo à direita -->
-        <div class="entrar ms-auto d-flex align-items-center">
-            <!-- Botão Login com ícone -->
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-                <i class="fas fa-user"></i> Login
-            </button>
+        <!-- Link para Cadastro com ícone -->
+        <a href="/register" class="ms-lg-3 btn btn-outline-primary">
+            <i class="fas fa-user-plus"></i> Cadastre-se
+        </a>
+    </div>
+</nav>
 
-            <!-- Link para Cadastro com ícone -->
-            <a href="/register" class="ms-lg-3 btn btn-outline-primary">
-                <i class="fas fa-user-plus"></i> Cadastre-se
-            </a>
-        </div>
-    </nav>
 
 
         <!-- Novo cabeçalho com título e estrelas abaixo do cabeçalho de navegação -->
@@ -435,8 +510,8 @@
             <div class="sidebar-overlay" id="overlay"></div>
 
             <!-- Scripts -->
-            <script>
-                // Seleciona o botão de menu e a sidebar
+             <script>
+                             // Seleciona o botão de menu e a sidebar
                 const sidebarToggle = document.getElementById('sidebarToggle');
                 const sidebar = document.getElementById('sidebar');
                 const overlay = document.getElementById('overlay');
@@ -452,7 +527,9 @@
                     sidebar.classList.remove('open');
                     overlay.classList.remove('open');
                 });
-            </script>
+             </script>
+           
+
 
         <!-- Redes Sociais -->
         <section id="redes-sociais" class="container mt-5 py-5">
