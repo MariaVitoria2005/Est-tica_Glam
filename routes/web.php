@@ -9,6 +9,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\ProfissionalController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\Servico_DetalhesController;
+use App\Http\Controllers\CancelamentoController;
 
 
 Route::get('/dashboard', function () {
@@ -35,6 +36,15 @@ Route::get('/pesquisar-servicos', [ServicoController::class, 'search'])->name('s
 // Route::post('/cancelar-servico', [ServicoController::class, 'cancelar'])->name('cancelar_servico');
 // routes/web.php
 Route::delete('/cancelar-servico/{id}', [ServicoController::class, 'cancelar'])->name('servico.cancelar');
+
+
+Route::middleware(['auth'])->group(function () {
+    // Página de cancelamento (GET)
+    Route::get('/cancelar-servico/{agendamentoId}', [CancelamentoController::class, 'showCancellationPage'])->name('cancelamento.page');
+    
+    // Processamento do cancelamento (POST)
+    Route::post('/cancelar-servico/{agendamentoId}', [CancelamentoController::class, 'processCancellation'])->name('cancelamento.process');
+});
 
 
 

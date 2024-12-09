@@ -16,7 +16,7 @@
 
 /* Estilo para a navbar fixa */
 nav {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -26,33 +26,44 @@ nav {
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center; */
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    padding: 10px 20px;
+    background-color: #333;
 }
 
 /* Logo */
-nav .logo-container {
-    display: inline-block;
+.logo-container {
+    flex: 1; /* Faz a logo ocupar o máximo de espaço disponível */
 }
 
-nav .logo {
-    width: 100px;
-}
 
 /* Links de Navegação */
 .nav-links {
     display: flex;
-    justify-content: center;
+    /* justify-content: center;
     list-style-type: none;
     padding: 10px 0;
     margin: 0;
-    flex-grow: 1;
+    flex-grow: 1; */
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+    flex: 2; /* Faz a lista de navegação ocupar o máximo de espaço disponível ao lado da logo */
+    justify-content: center; /* Alinha os links ao centro */
 }
 
-.nav-links li {
-    margin: 0 20px;
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
 }
 
-.nav-links a {
+/* .nav-links a {
     text-decoration: none;
     color: #333;
     font-weight: bold;
@@ -60,23 +71,26 @@ nav .logo {
     display: flex;
     align-items: center;
     padding: 5px;
-}
+} */
 
-.nav-links a:hover {
+/* .nav-links a:hover {
     color: #007bff;
-}
+} */
 
 /* Botões de Login e Cadastro à direita */
 .entrar {
+    /* display: flex;
+    align-items: center;
+    margin-left: auto; 
+    padding: 10px 20px; */
     display: flex;
     align-items: center;
-    margin-left: auto; /* Alinha os botões à direita */
-    padding: 10px 20px;
+    justify-content: flex-end;
 }
 
-.entrar .btn, .entrar a {
+/* .entrar .btn, .entrar a {
     margin-left: 10px;
-}
+} */
 
 /* Definindo a posição da body para não sobrepor com a navbar */
 body {
@@ -92,7 +106,6 @@ header.boasvindas {
     text-align: center;
     padding: 50px 20px;
     color: white;
-    margin-top: 50px; /* Para não sobrepor com a navbar */
     background: linear-gradient(135deg, #6a1b9a, #8e24aa); /* Gradiente chique */  
 }
 
@@ -166,10 +179,10 @@ header.boasvindas p {
     right: -250px; /* Sidebar começa fora da tela à direita */
     width: 250px;
     height: 100%;
-    background-color: #000; /* Cor de fundo da sidebar */
+    background-color: #333; /* Cor de fundo da sidebar */
     color: white;
-    padding-top: 60px;
-    transition: right 0.3s ease; /* Transição suave */
+    padding: 20px;
+    transition: all 0.3s ease-in-out; /* Transição suave */
     z-index: 999;
 }
 
@@ -178,20 +191,26 @@ header.boasvindas p {
 }
 
 .sidebar a {
-    color: #fff;
+    /* color: #fff;
     display: block;
     padding: 15px;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 18px; */
+
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 0;
+    border-bottom: 1px solid #444;
 }
 
 .sidebar a:hover {
-    background-color: #444;
+    background-color: #555;
 }
 
 /* Overlay para fechar a sidebar */
 .sidebar-overlay {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -200,17 +219,26 @@ header.boasvindas p {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s, opacity 0.3s linear;
-    z-index: 998;
+    z-index: 998; */
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998; /* Garantir que o overlay esteja abaixo da sidebar */
 }
 
-.sidebar-overlay.open {
-    visibility: visible;
-    opacity: 1;
-}
+/* .sidebar-overlay.open {
+     visibility: visible;
+    opacity: 1; 
+    
+} */
 
 /* Botão para abrir a sidebar */
 .btn-sidebar {
-    position: fixed;
+    /* position: fixed;
     top: 20px;
     left: 20px;
     background-color: #007bff;
@@ -219,11 +247,35 @@ header.boasvindas p {
     padding: 12px;
     border-radius: 50%;
     font-size: 24px;
-    z-index: 1001; /* Acima da sidebar */
+    z-index: 1001;  */
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.btn-sidebar:focus {
+/* .btn-sidebar:focus {
     outline: none;
+} */
+ /* Ajuste para telas menores */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Esconde os links de navegação no modo mobile */
+    }
+
+    .sidebar {
+        width: 200px; /* Ajuste para largura menor em dispositivos móveis */
+    }
+
+    .btn-sidebar {
+        display: block; /* Exibe o botão de hambúrguer */
+    }
+    .entrar {
+        justify-content: center; /* No mobile, centraliza os botões de login e cadastro */
+    }
 }
 
 
@@ -457,6 +509,7 @@ header.boasvindas p {
 
 
 
+
         <!-- Novo cabeçalho com título e estrelas abaixo do cabeçalho de navegação -->
         <header class="boasvindas">
             <h1>Bem-vindo à Estética Glam!</h1>
@@ -634,48 +687,74 @@ header.boasvindas p {
             </div>
         </section>
 
+       
         <!-- Script JavaScript -->
-        <script>
-            let servicoId = null;
+<script>
+    let servicoId = null;
 
-            // Quando o botão de cancelamento for clicado, armazene o ID do serviço
-            document.querySelectorAll('.btn-danger[data-bs-toggle="modal"]').forEach(button => {
-                button.addEventListener('click', function () {
-                    servicoId = this.getAttribute('data-id');
-                });
-            });
+    // Quando o botão de cancelamento for clicado, armazene o ID do serviço
+    document.querySelectorAll('.btn-danger[data-bs-toggle="modal"]').forEach(button => {
+        button.addEventListener('click', function () {
+            servicoId = this.getAttribute('data-id');
+        });
+    });
 
-            // Quando o botão de confirmar cancelamento for clicado
-            document.getElementById('confirmarCancelamento').addEventListener('click', function () {
-                if (servicoId) {
-                    // Enviar requisição AJAX para cancelar o serviço
-                    fetch(`/cancelar-servico/${servicoId}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token para segurança
-                        },
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Serviço cancelado com sucesso!');
-                            // Fechar o modal
-                            const modal = new bootstrap.Modal(document.getElementById('cancelamentoModal'));
-                            modal.hide();
-                            // Recarregar a página ou atualizar a lista de serviços
-                            window.location.reload();
-                        } else {
-                            alert('Erro ao cancelar o serviço.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Erro ao cancelar o serviço:', error);
-                        alert('Erro ao realizar o cancelamento.');
-                    });
+    // Quando o botão de confirmar cancelamento for clicado
+    document.getElementById('confirmarCancelamento').addEventListener('click', function () {
+        if (servicoId) {
+            // Enviar requisição AJAX para cancelar o serviço
+            fetch(`/cancelar-servico/${servicoId}`, {
+                method: 'POST',  // Mudado de DELETE para POST
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}', // CSRF token para segurança
+                },
+                body: JSON.stringify({
+                    percentagem: 10,  // Aqui você pode pegar o valor do campo de percentagem, por exemplo
+                    descricao: 'Cancelamento do serviço solicitado pelo cliente',
+                    confirm: 1, // Confirmar o cancelamento
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Serviço cancelado com sucesso!');
+                    // Fechar o modal
+                    const modal = new bootstrap.Modal(document.getElementById('cancelamentoModal'));
+                    modal.hide();
+                    // Recarregar a página ou atualizar a lista de serviços
+                    window.location.reload();
+                } else {
+                    alert('Erro ao cancelar o serviço.');
                 }
+            })
+            .catch(error => {
+                console.error('Erro ao cancelar o serviço:', error);
+                alert('Erro ao realizar o cancelamento.');
             });
-        </script>
+        }
+    });
+</script>
+
+        <!-- Modal de Cancelamento -->
+<div class="modal fade" id="cancelamentoModal" tabindex="-1" aria-labelledby="cancelamentoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelamentoModalLabel">Confirmar Cancelamento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Você tem certeza de que deseja cancelar este serviço?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-danger" id="confirmarCancelamento">Confirmar Cancelamento</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 

@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('clientes', function (Blueprint $table) {
-            if (!Schema::hasColumn('clientes', 'foto')) {
-                $table->string('foto')->nullable();
-            }
+        Schema::create('historico_agendamentos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('agendamento_id');
+            $table->string('descricao');
+            $table->timestamps();
         });
     }
 
@@ -23,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('clientes', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('historico_agendamentos');
     }
 };

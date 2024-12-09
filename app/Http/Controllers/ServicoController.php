@@ -63,32 +63,7 @@ class ServicoController
            return redirect()->route('Home.index');
     }
 
-    public function cancelar(Request $id)
-    {
-         // Encontre o serviço pelo ID
-        $servico = Servico::find($id);
 
-        if (!$servico) {
-            return response()->json(['success' => false, 'message' => 'Serviço não encontrado.'], 404);
-        }
-
-        // Defina a taxa de cancelamento (exemplo: R$ 10,00)
-        $taxaCancelamento = 10.00;
-
-        // Crie um pagamento para registrar a taxa de cancelamento
-        $pagamento = new Pagamento();
-        $pagamento->servico_id = $servico->id;
-        $pagamento->valor = $taxaCancelamento;
-        $pagamento->status = 'cancelado';  // Status de cancelamento
-        $pagamento->save();
-
-        // Marque o serviço como cancelado
-        $servico->status = 'cancelado';
-        $servico->save();
-
-        // Retorne a resposta de sucesso
-        return response()->json(['success' => true, 'message' => 'Serviço cancelado com sucesso. A taxa de cancelamento foi cobrada.']);
-    }
     
     /**
      * Display the specified resource.
